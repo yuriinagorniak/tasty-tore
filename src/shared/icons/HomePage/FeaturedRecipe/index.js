@@ -1,0 +1,1 @@
+export { PlateIcon } from "./PlateIcon";
