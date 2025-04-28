@@ -1,5 +1,4 @@
 export const MainLogo = ({color = "#E0CFA4", width = 50, height = 50}) => {
-    console.log(color);
     return (
         <svg
             width={width}

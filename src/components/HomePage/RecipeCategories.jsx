@@ -1,6 +1,8 @@
 import { NavLink } from "react-router";
 
 import { PastaIcon, FishIcon, CupcakeIcon, FriedEggIcon, RecipeCategoryCard } from "../../shared";
+import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContext";
+import { useContext } from "react";
 
 const categories = [
     {
@@ -30,15 +32,24 @@ const categories = [
 ];
 
 export const RecipeCategories = () => {
+    const { setQuery, handleSearch } = useContext(RecipeContext);
+    const changeQuery = (query) => {
+        setQuery(query);
+        handleSearch();
+    };
+
     return (
         <section className="bg-white flex flex-col items-center justify-center">
             <div className="container pt-[60px] pb-[90px]">
-                <h3 className="mb-[40px] text-[36px] font-bold text-black text-center">Recipes by category</h3>
+                <h3 className="mb-[40px] text-[36px] font-bold text-black text-center">
+                    Recipes by category
+                </h3>
 
                 <div className="flex items-center justify-around px-5 flex-wrap">
                     {categories.map((category) => (
                         <NavLink key={category.title} to={category.link}>
                             <RecipeCategoryCard
+                                onClick={() => changeQuery(category.title)}
                                 icon={category.img}
                                 title={category.title}
                                 bgColor={category.bgColor}
