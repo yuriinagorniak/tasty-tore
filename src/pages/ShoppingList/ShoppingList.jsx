@@ -30,7 +30,6 @@ export const ShoppingList = () => {
     const [selectedMeasure, setSelectedMeasure] = useState(null);
 
     const [quantityInputValue, setQuantityInputValue] = useState(0);
-    const [selectedQuantity, setSelectedQuantity] = useState(null);
 
     const updateQuery = (q) => {
         setQuery(q);
@@ -44,19 +43,10 @@ export const ShoppingList = () => {
     };
 
     const handleQuantityChange = (value) => {
-        // if (value < 0) {
-        //     setQuantityInputValue(0);
-        // } else {
         setQuantityInputValue(+value);
-        // }
     };
 
     const handleAddProduct = () => {
-        console.log("Here we are");
-        console.log(!!selectedProduct);
-        console.log(!!selectedMeasure);
-        console.log(!!quantityInputValue);
-        console.log(isNaN(+"Hello"));
         if (
             selectedProduct &&
             selectedMeasure &&
@@ -64,7 +54,6 @@ export const ShoppingList = () => {
             !isNaN(quantityInputValue) &&
             quantityInputValue > 0
         ) {
-            console.log("Here we are as well");
             const newProduct = {
                 food: selectedProduct.food.label,
                 foodId: selectedProduct.food.foodId,
@@ -77,13 +66,9 @@ export const ShoppingList = () => {
         }
     };
 
-    console.log("selectedProduct");
-    console.log(selectedProduct);
-    console.log(selectedMeasure);
-
     return (
         <div>
-            <PageBanner bg={ShoppingListBg} pageTitle="Shopping list"></PageBanner>
+            <PageBanner bg={ShoppingListBg} pageTitle="Shop smart, cook better"></PageBanner>
             <div className="container text-center py-10 flex flex-col">
                 <div className="flex items-center justify-center gap-3 mb-10">
                     <p>Add a product:</p>
