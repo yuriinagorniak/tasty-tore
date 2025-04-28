@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const recipeAppId = import.meta.env.VITE_RECIPE_APP_ID;
+const recipeAppKey = import.meta.env.VITE_RECIPE_APP_KEY;
+
 import { RecipeContext } from "./RecipeContext";
 
 export const RecipeContextProvider = ({ children }) => {
@@ -9,44 +12,53 @@ export const RecipeContextProvider = ({ children }) => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [recipeFilters, setRecipeFilters] = useState({});
+    const [selectedRecipe, setSelectedRecipe] = useState("");
+    const [nextPageHref, setNextPageHref] = useState("");
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        fetchRecipes();
-    };
-
-    const fetchRecipes = async () => {
+    const fetchRecipes = async (nextPageHref) => {
+        setLoading(true);
         try {
-            const response = await axios.get(
-                // "https://api.edamam.com/api/recipes/v2?type=public&q=e&app_id=be2442eb&app_key=0f3651d1009d94fb20137cfa20c39d2d",
-                // {
-                //     headers: {
-                //         "Edamam-Account-User": "be2442eb",
-                //     },
-                // }
-
-                "https://api.edamam.com/api/recipes/v2",
-                {
-                    params: {
-                        type: "public",
-                        q: query || "e",
-                        app_id: "be2442eb",
-                        app_key: "0f3651d1009d94fb20137cfa20c39d2d",
-                    },
-                    headers: {
-                        "Edamam-Account-User": "be2442eb",
-                    },
-                }
-            );
-            setRecipes(response.data.hits);
+            setError(null);
+            setLoading(true);
+            const response = await axios.get(nextPageHref ?? "https://api.edamam.com/api/recipes/v2", {
+                params: {
+                    type: "public",
+                    q: query || "e",
+                    app_id: recipeAppId,
+                    app_key: recipeAppKey,
+                    ...recipeFilters,
+                },
+                headers: {
+                    "Edamam-Account-User": recipeAppId,
+                },
+            });
+            setRecipes(response.data?.hits ?? []);
+            setNextPageHref(response.data["_links"]?.next?.href ?? '');
             setLoading(false);
         } catch (err) {
             setError("Failed to fetch recipes: " + err);
             setLoading(false);
+        } finally {
+            setLoading(false);
         }
     };
 
-    // Fetch data from Edamam API
+    const handleSearch = async (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        fetchRecipes(null);
+    };
+    
+    const handleNextPageSearch = async () => {
+        fetchRecipes(nextPageHref);
+    };
+
+    useEffect(() => {
+        handleSearch();
+    }, [recipeFilters]);
+
     useEffect(() => {
         fetchRecipes();
     }, []);
@@ -58,6 +70,10 @@ export const RecipeContextProvider = ({ children }) => {
         query,
         setQuery,
         handleSearch,
+        setRecipeFilters,
+        selectedRecipe,
+        setSelectedRecipe,
+        handleNextPageSearch
     };
 
     return <RecipeContext.Provider value={ctxValue}>{children}</RecipeContext.Provider>;
