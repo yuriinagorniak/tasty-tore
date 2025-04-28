@@ -1,4 +1,9 @@
-export { HomePage } from "./HomePage";
-export { Dashboard } from "./Dashboard";
+export * from "./HomePage";
+export * from "./Dashboard";
+export * from "./AppContainer";
+export * from "./RecipePage";
+export * from "./ScrollToTop";
 export * from "./Recipes";
-export { AppContainer } from "./AppContainer";
+export * from "./FavouriteRecipes";
+export * from "./ShoppingList";
+export * from "./MealPlanner";

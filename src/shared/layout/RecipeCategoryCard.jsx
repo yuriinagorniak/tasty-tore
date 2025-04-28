@@ -1,8 +1,6 @@
 import MarbleBg from "../../assets/HomePage/marble.webp";
 
 export const RecipeCategoryCard = ({ icon, title, bgColor, onClick = () => {} }) => {
-    console.log(bgColor);
-
     return (
         <div
             onClick={onClick}
