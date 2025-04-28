@@ -1,0 +1,2 @@
+export { useFetchProduct } from "./useFetchProduct";
+
