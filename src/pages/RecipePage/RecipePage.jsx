@@ -2,7 +2,8 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 
 import { RecipeContext, SavedRecipesContext, ShoppingListContext } from "../../contexts";
-import { InfoTag, RecipeCard } from "../../shared/layout";
+import { InfoTag, RecipeCard, SeparatorLine, TransparentButton } from "../../shared";
+import { RecipeInfoSection } from "../../components/";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);
@@ -55,9 +56,9 @@ export const RecipePage = () => {
                                 <span className="font-bold">Calories:</span>{" "}
                                 {Math.round(recipe.calories)}
                             </p>
-                            <button className="border-2 w-full py-3 rounded-xl">
+                            <TransparentButton>
                                 Add to meal plan
-                            </button>
+                            </TransparentButton>
                             <div className="pt-2 flex justify-between">
                                 <a
                                     href={recipe.url}
@@ -65,53 +66,29 @@ export const RecipePage = () => {
                                     target="_blank"
                                     className="w-[70%]"
                                 >
-                                    <button className="w-full border-2 py-3 rounded-xl">
+                                    <TransparentButton>
                                         Open recipe
-                                    </button>
+                                    </TransparentButton>
                                 </a>
-                                <button
-                                    className={`w-[28%] border-2 py-3 rounded-xl ${
-                                        currentRecipeSaved
-                                            ? "bg-(--primary-text-color) text-(--additional-text-color)"
-                                            : "bg-(--additional-text-color) text-(--primary-text-color)"
-                                    }`}
-                                    onClick={() => saveRecipe(selectedRecipe)}
-                                >
-                                    {currentRecipeSaved ? "Saved" : "Save"}
-                                </button>
+                                <div className="w-[28%]">
+                                    <TransparentButton
+                                        handleClick={() => saveRecipe(selectedRecipe)}
+                                        filled={currentRecipeSaved}
+                                    >
+                                        {currentRecipeSaved ? "Saved" : "Save"}
+                                    </TransparentButton>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="flex flex-col items-center my-20">
-                    <hr className="w-[80%] h-0.5" />
-
-                    <div className="w-full flex flex-col justify-center items-center my-10 gap-4">
-                        <h4 className="text-2xl font-bold">Health</h4>
-                        <ul className="flex w-[70%] flex-wrap justify-center items-center gap-1">
-                            {recipe.healthLabels.map((title) => (
-                                <li>
-                                    <InfoTag label={title} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <hr className="w-[80%] h-0.5" />
-
-                    <div className="w-full flex flex-col justify-center items-center my-10 gap-4">
-                        <h4 className="text-2xl font-bold">Diet</h4>
-                        <ul className="flex w-[70%] flex-wrap justify-center items-center gap-1">
-                            {recipe.dietLabels.map((title) => (
-                                <li>
-                                    <InfoTag label={title} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <hr className="w-[80%] h-0.5" />
+                    <SeparatorLine />
+                    <RecipeInfoSection recipe={recipe} dataKey="healthLabels" />
+                    <SeparatorLine />
+                    <RecipeInfoSection recipe={recipe} dataKey="dietLabels" />
+                    <SeparatorLine />
 
                     <div className="w-[70%] flex flex-row justify-between my-10 gap-4">
                         <div className="w-[50%]">
@@ -123,17 +100,14 @@ export const RecipePage = () => {
                             </ul>
                         </div>
 
-                        <div className="w-[40%] flex flex-col items-center">
-                            <button
-                                className="border-2 py-3 px-4 rounded-xl"
-                                onClick={() => {
-                                    // console.log("----recipe page ing-----");
-                                    // console.log(recipe.ingredients);
+                        <div className="w-[30%] flex flex-col items-center">
+                            <TransparentButton
+                                handleClick={() => {
                                     addRecipeIngredients(recipe.ingredients);
                                 }}
                             >
                                 Add to shopping list
-                            </button>
+                            </TransparentButton>
                         </div>
                     </div>
 
