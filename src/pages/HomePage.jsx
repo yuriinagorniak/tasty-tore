@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { Header, HeroSection, RecipeCategories, FeaturedRecipe } from "../../components";
+import { Header, HeroSection, RecipeCategories, FeaturedRecipe } from "../components";
 
 export const HomePage = () => {
     return (

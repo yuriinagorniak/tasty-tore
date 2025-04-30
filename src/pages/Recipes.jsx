@@ -1,5 +1,5 @@
-import { RecipeSearch, RecipeGallery, RecipeFilter } from "../../components/Recipes";
-import { RecipeContextProvider } from "../../contexts/RecipeContextProvider/RecipeContextProvider";
+import { RecipeSearch, RecipeGallery, RecipeFilter } from "../components/Recipes";
+import { RecipeContextProvider } from "../contexts/RecipeContextProvider/RecipeContextProvider";
 
 export const Recipes = () => {
     return (

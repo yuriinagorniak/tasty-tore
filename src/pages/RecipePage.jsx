@@ -1,16 +1,28 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router";
+import { Modal } from "@mui/material";
 
-import { RecipeContext, SavedRecipesContext, ShoppingListContext } from "../../contexts";
-import { InfoTag, RecipeCard, SeparatorLine, TransparentButton } from "../../shared";
-import { RecipeInfoSection } from "../../components/";
+import {
+    RecipeContext,
+    SavedRecipesContext,
+    ShoppingListContext,
+    MealPlannerContext,
+} from "../contexts";
+import { InfoTag, RecipeCard, SeparatorLine, TransparentButton, BasicModal } from "../shared";
+import { AddRecipeSelection, RecipeInfoSection } from "../components";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);
     const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
     const { shoppingList, addRecipeIngredients } = useContext(ShoppingListContext);
+    const { addRecipe } = useContext(MealPlannerContext);
+
+    const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
     const recipe = selectedRecipe.recipe;
+
+    const handleCloseModal = () => setOpenModal(false);
+    const handleOpenModal = () => setOpenModal(true);
 
     const currentRecipeSaved = savedRecipes.some(
         (recipeData) => recipeData.recipe.uri === recipe.uri
@@ -56,7 +68,10 @@ export const RecipePage = () => {
                                 <span className="font-bold">Calories:</span>{" "}
                                 {Math.round(recipe.calories)}
                             </p>
-                            <TransparentButton>
+                            <TransparentButton
+                                // handleClick={() => addRecipe("monday", "breakfast", recipe)}
+                                handleClick={() => handleOpenModal()}
+                            >
                                 Add to meal plan
                             </TransparentButton>
                             <div className="pt-2 flex justify-between">
@@ -66,9 +81,7 @@ export const RecipePage = () => {
                                     target="_blank"
                                     className="w-[70%]"
                                 >
-                                    <TransparentButton>
-                                        Open recipe
-                                    </TransparentButton>
+                                    <TransparentButton>Open recipe</TransparentButton>
                                 </a>
                                 <div className="w-[28%]">
                                     <TransparentButton
@@ -123,6 +136,9 @@ export const RecipePage = () => {
                     </div>
                 </div>
             </div>
+            <BasicModal openModal={openModal} handleCloseModal={handleCloseModal}>
+                <AddRecipeSelection recipe={selectedRecipe}  handleCloseModal={handleCloseModal}/>
+            </BasicModal>
         </section>
     );
 };
