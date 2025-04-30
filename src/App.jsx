@@ -1,10 +1,6 @@
 import { AppRouter } from "./routes/AppRouter";
 import { BrowserRouter as Router } from "react-router";
-import {
-    ShoppingListContextProvider,
-    RecipeContextProvider,
-    SavedRecipesContextProvider,
-} from "./contexts";
+import { AppProviders } from "./contexts";
 import { ScrollToTop } from "./pages";
 
 function App() {
@@ -12,13 +8,9 @@ function App() {
         <>
             <Router>
                 <ScrollToTop />
-                <RecipeContextProvider>
-                    <SavedRecipesContextProvider>
-                        <ShoppingListContextProvider>
-                            <AppRouter />
-                        </ShoppingListContextProvider>
-                    </SavedRecipesContextProvider>
-                </RecipeContextProvider>
+                <AppProviders>
+                    <AppRouter />
+                </AppProviders>
             </Router>
         </>
     );
