@@ -3,45 +3,6 @@ import { useState } from "react";
 import { MealPlannerContext } from "./MealPlannerContext";
 import { daysOfWeek, mealTypes } from "../../shared";
 
-
-// const initialPlanner = {
-//     monday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     tuesday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     wednesday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     thursday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     friday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     saturday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-//     sunday: {
-//         breakfast: null,
-//         lunch: null,
-//         dinner: null,
-//     },
-// };
-
 const initialPlanner = daysOfWeek.reduce((daysAcc, day) => {
     daysAcc[day] = mealTypes.reduce((mealsAcc, type) => {
         return { ...mealsAcc, [type]: null };
