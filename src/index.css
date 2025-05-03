@@ -54,18 +54,7 @@ h1 {
 button {
     cursor: pointer;
 }
-/* button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
-.tint-bg {
-    position: relative;
-    z-index: 0;
-}
 
 .tint-bg::after {
     content: "";
@@ -77,9 +66,4 @@ button:focus-visible {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
-}
-
-.tint-bg > div {
-    z-index: 2;
-    position: relative;
 }
