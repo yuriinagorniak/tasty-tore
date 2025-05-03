@@ -1,19 +1,32 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContext";
-import { SavedRecipesContext } from "../../contexts/SavedRecipesContextProvider/SavedRecipesContext";
+import { useSnackbar } from "../hooks";
+import { BookmarkIcon } from "../shared";
+import { RecipeContext, SavedRecipesContext } from "../contexts";
 
-import { BookmarkIcon } from "../icons";
 
 export const RecipeCard = ({ data }) => {
     const navigate = useNavigate();
+    const showMessage = useSnackbar();
     const { setSelectedRecipe } = useContext(RecipeContext);
     const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
+    const recipeSaved = savedRecipes.some(
+        (recipeData) => recipeData.recipe.uri === data.recipe.uri
+    );
 
     const handleOpenRecipe = (recipeHref) => {
         setSelectedRecipe(recipeHref);
         navigate(`/recipe`);
         window.scrollTo({ top: 0 });
+    };
+
+    const handleSaveRecipe = (e) => {
+        e.stopPropagation();
+        saveRecipe(data);
+        showMessage(
+            recipeSaved ? "The recipe removed from the favourites" : "The recipe saved!",
+            "success"
+        );
     };
 
     return (
@@ -32,14 +45,8 @@ export const RecipeCard = ({ data }) => {
                             >
                                 {data.recipe.label}
                             </p>
-                            <div
-                                className="w-[40px] h-[40px]"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    saveRecipe(data);
-                                }}
-                            >
-                                <BookmarkIcon filled={savedRecipes.some((recipeData) => recipeData.recipe.uri === data.recipe.uri)} />
+                            <div className="w-[40px] h-[40px]" onClick={handleSaveRecipe}>
+                                <BookmarkIcon filled={recipeSaved} />
                             </div>
                         </div>
                     </div>
