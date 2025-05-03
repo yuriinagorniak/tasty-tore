@@ -1,6 +1,9 @@
-export { Header } from "./Header";
 export * from "./HomePage";
 export * from "./Recipes";
 export * from "./RecipePage";
 export * from "./MealPlanner";
 export * from "./ShoppingList";
+
+export { Header } from "./Header";
+export { MessageBar } from "./MessageBar";
+export { RecipeCard } from "./RecipeCard";
