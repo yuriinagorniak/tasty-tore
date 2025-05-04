@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 
 import { RecipeFilter } from "./RecipeFilter";
-import { RecipeCard } from "../../shared";
+import { RecipeCard } from "../../components";
 
 import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContext";
 

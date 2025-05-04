@@ -1,7 +1,6 @@
+import { daysOfWeek, mealTypes } from "../../constants/mealPlannerConstants";
 import { useState } from "react";
-
 import { MealPlannerContext } from "./MealPlannerContext";
-import { daysOfWeek, mealTypes } from "../../shared";
 
 const initialPlanner = daysOfWeek.reduce((daysAcc, day) => {
     daysAcc[day] = mealTypes.reduce((mealsAcc, type) => {

@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import FavouriteRecipesBg from "../assets/FavouriteRecipes/bg.jpg";
 
-import { RecipeCard, PageBanner } from "../shared";
-import { SavedRecipesContext } from "../contexts/SavedRecipesContextProvider/SavedRecipesContext";
+import { RecipeCard } from "../components";
+import { PageBanner } from "../shared";
+import { SavedRecipesContext } from "../contexts";
 
 export const FavouriteRecipes = () => {
     const { savedRecipes } = useContext(SavedRecipesContext);

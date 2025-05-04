@@ -1,6 +1,6 @@
-import { PlateIcon } from "../../shared/icons";
+import { PlateIcon } from "../../shared";
 import FeaturedRecipeBg from "../../assets/HomePage/featured-recipe-bg.jpg";
-import { RecipeCard } from "../../shared";
+import { RecipeCard } from "../../components";
 
 export const FeaturedRecipe = () => {
     const today = new Date();
