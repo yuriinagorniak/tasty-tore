@@ -1,0 +1,2 @@
+export { AddProductInput } from "./AddProductInput";
+
