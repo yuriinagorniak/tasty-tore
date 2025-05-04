@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { MealPlannerContext } from "../../contexts";
 import { useSnackbar } from "../../hooks/useSnackbar";
 
-import { daysOfWeek, mealTypes } from "../../shared";
+import { daysOfWeek, mealTypes } from "../../constants/mealPlannerConstants";
 
 export const AddRecipeSelection = ({ recipe = null, handleCloseModal = () => {} }) => {
     const { addRecipe } = useContext(MealPlannerContext);
