@@ -4,9 +4,16 @@ import { AddProductInput } from "../components/ShoppingList";
 import { PageBanner } from "../shared";
 import ShoppingListBg from "../assets/ShoppingList/bg.jpeg";
 import { ShoppingListContext } from "../contexts";
+import { useSnackbar } from "../hooks";
 
 export const ShoppingList = () => {
     const { shoppingList, deleteProduct } = useContext(ShoppingListContext);
+    const showMessage = useSnackbar();
+
+    const handleDeleteProduct = (id) => {
+        deleteProduct(id)
+        showMessage("The product removed from the shopping list", "success");
+    }   
 
     return (
         <div>
@@ -23,7 +30,7 @@ export const ShoppingList = () => {
                                 </p>
                                 <button
                                     className="p-1 border-2 border-[var(--primary-text-color)] rounded-md"
-                                    onClick={() => deleteProduct(prod.foodId)}
+                                    onClick={() => handleDeleteProduct(prod.foodId)}
                                 >
                                     del
                                 </button>
