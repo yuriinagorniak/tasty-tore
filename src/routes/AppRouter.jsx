@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router";
-import { Dashboard, HomePage, Recipes, AppContainer, RecipePage, FavouriteRecipes, ShoppingList, MealPlanner } from "../pages";
+import { Dashboard, HomePage, Recipes, AppContainer, RecipePage, FavouriteRecipes, ShoppingList, MealPlanner, PageNotFound } from "../pages";
 
 export const AppRouter = () => {
     return (
@@ -10,9 +10,11 @@ export const AppRouter = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/favourites" element={<FavouriteRecipes />} />
                 <Route path="/meal-planner" element={<MealPlanner />} />
-                <Route path="/shopping-list" element={<ShoppingList />}></Route>
+                <Route path="/shopping-list" element={<ShoppingList />} />
 
                 <Route path="/recipe" element={<RecipePage />} />
+
+                <Route path="*" element={<PageNotFound />} />
             </Route>
         </Routes>
     );

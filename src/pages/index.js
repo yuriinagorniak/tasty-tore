@@ -7,4 +7,5 @@ export { Recipes } from "./Recipes";
 export { FavouriteRecipes } from "./FavouriteRecipes";
 export { ShoppingList } from "./ShoppingList";
 export { MealPlanner } from "./MealPlanner";
+export { PageNotFound } from "./PageNotFound";
 

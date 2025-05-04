@@ -2,6 +2,7 @@ import { useContext, useRef } from "react";
 
 import { RecipeFilter } from "./RecipeFilter";
 import { RecipeCard } from "../../components";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContext";
 
@@ -20,7 +21,7 @@ export const RecipeGallery = () => {
     return (
         <div className="w-[75%]">
             {error && <p>{error}</p>}
-            {loading && <p>Loading...</p>}
+            {loading && <div className="w-full flex justify-center pt-10"><CircularProgress color="inherit"/></div>}
             {!error && !loading && recipes && (
                 <div className="flex flex-col gap-10 justify-center">
                     {recipes.length > 0 ? (
