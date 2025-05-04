@@ -1,21 +1,26 @@
 import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { Modal } from "@mui/material";
+import { CircularProgress } from "@mui/material";
+import { useSnackbar } from "../hooks";
 
 import {
     RecipeContext,
     SavedRecipesContext,
     ShoppingListContext,
-    MealPlannerContext,
+    SnackbarContext,
 } from "../contexts";
-import { InfoTag, RecipeCard, SeparatorLine, TransparentButton, BasicModal } from "../shared";
-import { AddRecipeSelection, RecipeInfoSection } from "../components";
+import { InfoTag, SeparatorLine, TransparentButton, BasicModal } from "../shared";
+import {
+    AddRecipeSelection,
+    RecipeInfoSection,
+    IngredientsSection,
+    RecipeDetails,
+    RecipeCard,
+} from "../components";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);
-    const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
-    const { shoppingList, addRecipeIngredients } = useContext(ShoppingListContext);
-    const { addRecipe } = useContext(MealPlannerContext);
+    const { addRecipeIngredients } = useContext(ShoppingListContext);
 
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
@@ -23,10 +28,6 @@ export const RecipePage = () => {
 
     const handleCloseModal = () => setOpenModal(false);
     const handleOpenModal = () => setOpenModal(true);
-
-    const currentRecipeSaved = savedRecipes.some(
-        (recipeData) => recipeData.recipe.uri === recipe.uri
-    );
 
     const suggestedRecipes = recipes.filter((r) => r.recipe.label !== recipe.label).slice(0, 3);
 
@@ -43,86 +44,19 @@ export const RecipePage = () => {
     return (
         <section>
             <div className="container bg-[#373737] pt-[60px] pb-[90px] px-3 rounded-md">
-                <div className="flex px-16 justify-center gap-25">
-                    <div className="border-4 w-[400px] h-[400px] rounded-xl overflow-hidden">
-                        <img
-                            className="w-full h-full object-cover"
-                            src={
-                                recipe.images?.LARGE?.url ||
-                                recipe.images?.REGULAR?.url ||
-                                recipe.image
-                            }
-                            alt={recipe.label}
-                        />
-                    </div>
-                    <div className="w-[30%] flex flex-col justify-between">
-                        <p className="font-bold text-5xl">{recipe.label}</p>
-                        <div>
-                            <p>
-                                <span className="font-bold">Source:</span> {recipe.source}
-                            </p>
-                            <p>
-                                <span className="font-bold">Cooking time:</span> {recipe.totalTime}
-                            </p>
-                            <p>
-                                <span className="font-bold">Calories:</span>{" "}
-                                {Math.round(recipe.calories)}
-                            </p>
-                            <TransparentButton
-                                // handleClick={() => addRecipe("monday", "breakfast", recipe)}
-                                handleClick={() => handleOpenModal()}
-                            >
-                                Add to meal plan
-                            </TransparentButton>
-                            <div className="pt-2 flex justify-between">
-                                <a
-                                    href={recipe.url}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    className="w-[70%]"
-                                >
-                                    <TransparentButton>Open recipe</TransparentButton>
-                                </a>
-                                <div className="w-[28%]">
-                                    <TransparentButton
-                                        handleClick={() => saveRecipe(selectedRecipe)}
-                                        filled={currentRecipeSaved}
-                                    >
-                                        {currentRecipeSaved ? "Saved" : "Save"}
-                                    </TransparentButton>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <RecipeDetails handleOpenModal={handleOpenModal} />
 
                 <div className="flex flex-col items-center my-20">
                     <SeparatorLine />
-                    <RecipeInfoSection recipe={recipe} dataKey="healthLabels" />
+                    <RecipeInfoSection recipe={recipe} dataKey="healthLabels" label="Health" />
                     <SeparatorLine />
-                    <RecipeInfoSection recipe={recipe} dataKey="dietLabels" />
+                    <RecipeInfoSection recipe={recipe} dataKey="dietLabels" label="Diet" />
                     <SeparatorLine />
 
-                    <div className="w-[70%] flex flex-row justify-between my-10 gap-4">
-                        <div className="w-[50%]">
-                            <h4 className="text-2xl font-bold">Ingredients:</h4>
-                            <ul className="w-full flex flex-col flex-wrap gap-2 pt-5 pl-3">
-                                {recipe.ingredientLines.map((title) => (
-                                    <li>- {title}</li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="w-[30%] flex flex-col items-center">
-                            <TransparentButton
-                                handleClick={() => {
-                                    addRecipeIngredients(recipe.ingredients);
-                                }}
-                            >
-                                Add to shopping list
-                            </TransparentButton>
-                        </div>
-                    </div>
+                    <IngredientsSection
+                        recipe={recipe}
+                        addRecipeIngredients={addRecipeIngredients}
+                    />
 
                     <div className="mt-20 flex flex-col items-center gap-4">
                         <h4 className="text-2xl font-bold">You might also like:</h4>
@@ -137,7 +71,7 @@ export const RecipePage = () => {
                 </div>
             </div>
             <BasicModal openModal={openModal} handleCloseModal={handleCloseModal}>
-                <AddRecipeSelection recipe={selectedRecipe}  handleCloseModal={handleCloseModal}/>
+                <AddRecipeSelection recipe={selectedRecipe} handleCloseModal={handleCloseModal} />
             </BasicModal>
         </section>
     );
