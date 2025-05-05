@@ -26,7 +26,7 @@ export const ShoppingList = () => {
                             <div className="flex gap-5">
                                 <p key={prod.foodId}>
                                     {prod.food} -{" "}
-                                    {prod.amount.map((am) => `${am.quantity} ${am.measure};   `)}
+                                    {prod.amount.map((am) => `${am.quantity.toFixed(2)} ${am.measure};   `)}
                                 </p>
                                 <button
                                     className="p-1 border-2 border-[var(--primary-text-color)] rounded-md"
