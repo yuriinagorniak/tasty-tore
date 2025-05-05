@@ -10,17 +10,9 @@ import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContex
 export const RecipeGallery = () => {
     const { recipes, loading, error, handleNextPageSearch } = useContext(RecipeContext);
 
-
-    const rendersCount1 = useRef(0);
-    rendersCount1.current += 1;
-    // console.log("Recipe Gallery - " + rendersCount1.current);
-
-
-
-
     return (
         <div className="w-[75%]">
-            {error && <p>{error}</p>}
+            {error && <p>Something went wrong. Please try again.</p>}
             {loading && <div className="w-full flex justify-center pt-10"><CircularProgress color="inherit"/></div>}
             {!error && !loading && recipes && (
                 <div className="flex flex-col gap-10 justify-center">
