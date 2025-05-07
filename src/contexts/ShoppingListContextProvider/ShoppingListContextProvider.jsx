@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ShoppingListContext } from "./ShoppingListContext";
+import { useLocalStorage } from "../../hooks";
 
 export const ShoppingListContextProvider = ({ children }) => {
-    const [shoppingList, setShoppingList] = useState([]);
+    const { getFromStorage, setToStorage } = useLocalStorage("shoppingList");
+    const initialValue = getFromStorage();
+    const [shoppingList, setShoppingList] = useState(initialValue);
 
     const addProduct = (newProduct, list) => {
         const updatedList = JSON.parse(JSON.stringify(list));
@@ -63,7 +66,9 @@ export const ShoppingListContextProvider = ({ children }) => {
         setShoppingList((prev) => prev.filter((item) => item.foodId !== productId))
     }
 
-    
+    useEffect(() => {
+        setToStorage(shoppingList);
+    }, [shoppingList])
 
     const ctxValue = { shoppingList, addRecipeIngredients, addSingleProduct, deleteProduct };
     return <ShoppingListContext.Provider value={ctxValue}>{children}</ShoppingListContext.Provider>;

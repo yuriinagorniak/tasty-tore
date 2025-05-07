@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { daysOfWeek, mealTypes } from "../../constants/mealPlannerConstants";
-import { useState } from "react";
 import { MealPlannerContext } from "./MealPlannerContext";
+import { useLocalStorage } from "../../hooks";
 
 const initialPlanner = daysOfWeek.reduce((daysAcc, day) => {
     daysAcc[day] = mealTypes.reduce((mealsAcc, type) => {
@@ -11,7 +12,9 @@ const initialPlanner = daysOfWeek.reduce((daysAcc, day) => {
 }, {});
 
 export const MealPlannerContextProvider = ({ children }) => {
-    const [planner, setPlanner] = useState(initialPlanner);
+    const { getFromStorage, setToStorage } = useLocalStorage("mealPlanner", initialPlanner); 
+    const initialValue = getFromStorage();
+    const [planner, setPlanner] = useState(initialValue);
 
     function addRecipe(day, mealType, recipe) {
         setPlanner((prev) => ({ ...prev, [day]: { ...prev[day], [mealType]: recipe } }));
@@ -19,6 +22,10 @@ export const MealPlannerContextProvider = ({ children }) => {
 
     const ctxValue = { planner, addRecipe };
     console.log(planner);
+
+    useEffect(() => {
+        setToStorage(planner);
+    }, [planner]);
 
     return <MealPlannerContext.Provider value={ctxValue}>{children}</MealPlannerContext.Provider>;
 };
