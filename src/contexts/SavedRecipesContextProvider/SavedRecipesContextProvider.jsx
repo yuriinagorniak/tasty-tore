@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SavedRecipesContext } from "./SavedRecipesContext";
+import { useLocalStorage } from "../../hooks";
 
 export const SavedRecipesContextProvider = ({ children }) => {
-    const [savedRecipes, setSavedRecipes] = useState([]);
+    const { getFromStorage, setToStorage } = useLocalStorage('savedRecipes');
+    const initialValue = getFromStorage();
+    const [savedRecipes, setSavedRecipes] = useState(initialValue);
 
     const saveRecipe = (recipe) => {
         if (recipe) {
@@ -15,6 +18,10 @@ export const SavedRecipesContextProvider = ({ children }) => {
             }
         }
     };
+
+    useEffect(() => {
+        setToStorage(savedRecipes);
+    }, [savedRecipes]);
 
     const ctxValue = { savedRecipes, saveRecipe };
     return <SavedRecipesContext.Provider value={ctxValue}>{children}</SavedRecipesContext.Provider>;
