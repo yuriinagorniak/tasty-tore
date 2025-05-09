@@ -6,3 +6,4 @@ export * from "./ShoppingList";
 export { Header } from "./Header";
 export { MessageBar } from "./MessageBar";
 export { RecipeCard } from "./RecipeCard";
+export { MealPlannerRecipeCard } from "./MealPlannerRecipeCard";
