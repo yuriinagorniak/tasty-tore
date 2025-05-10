@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { SeparatorLine, PageBanner } from "../shared";
 import { MealPlannerContext, RecipeContext, SavedRecipesContext } from "../contexts";
-import { RecipeCard } from "../components";
+import { MealPlannerRecipeCard } from "../components";
 import { daysOfWeek, mealTypes } from "../constants/mealPlannerConstants";
 
 export const MealPlanner = () => {
@@ -10,26 +10,17 @@ export const MealPlanner = () => {
     return (
         <div>
             <PageBanner pageTitle="Simplify your meals, plan your week" />
-            <div className="flex flex-col gap-10">
+            <div className="w-full px-10 py-5 flex flex-row justify-around items-center text-center gap-4 flex-wrap">
                 {daysOfWeek.map((day) => (
-                    <div key={day} className="flex flex-col items-center gap-4">
-                        <h2 className="text-2xl capitalize">{day}</h2>
-
-                        <div className="flex w-[80%] h-44 gap-4 justify-center">
+                    <div className="flex flex-col gap-5 w-[13%] min-w-[250px] pt-5">
+                        <h3 className="font-bold text-2xl capitalize">{day}</h3>
+                        <div className="flex flex-col gap-3">
                             {mealTypes.map((type) => (
-                                <div key={type} className="flex flex-col gap-2 w-1/3 items-center">
-                                    <h3 className="text-lg capitalize">{type}</h3>
-
-                                    {planner[day][type] ? (
-                                        <RecipeCard data={planner[day][type]} />
-                                    ) : (
-                                        <span className="text-gray-400">No recipe</span>
-                                    )}
+                                <div className="w-full h-36">
+                                    <MealPlannerRecipeCard data={planner[day][type]} />
                                 </div>
                             ))}
                         </div>
-
-                        <SeparatorLine />
                     </div>
                 ))}
             </div>

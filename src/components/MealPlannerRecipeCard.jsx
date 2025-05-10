@@ -10,7 +10,7 @@ export const MealPlannerRecipeCard = ({ data }) => {
     const { setSelectedRecipe } = useContext(RecipeContext);
     const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
     const recipeSaved = savedRecipes.some(
-        (recipeData) => recipeData.recipe.uri === data.recipe.uri
+        (recipeData) => recipeData.recipe.uri === data?.recipe.uri
     );
 
     const handleOpenRecipe = (recipeHref) => {

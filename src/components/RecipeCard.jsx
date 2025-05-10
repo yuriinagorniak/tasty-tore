@@ -11,7 +11,7 @@ export const RecipeCard = ({ data }) => {
     const { setSelectedRecipe } = useContext(RecipeContext);
     const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
     const recipeSaved = savedRecipes.some(
-        (recipeData) => recipeData.recipe.uri === data.recipe.uri
+        (recipeData) => recipeData.recipe.uri === data?.recipe.uri
     );
 
     const handleOpenRecipe = (recipeHref) => {
@@ -34,7 +34,7 @@ export const RecipeCard = ({ data }) => {
             {data?.recipe && (
                 <div
                     className="w-full h-full border-2 rounded-md bg-no-repeat bg-cover bg-center overflow-hidden cursor-pointer"
-                    style={{ backgroundImage: `url(${data.recipe.image})` }}
+                    style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url})` }}
                     onClick={() => handleOpenRecipe(data)}
                 >
                     <div className="bg-[rgba(0,0,0,0.8)] w-full h-full flex flex-col justify-end">
