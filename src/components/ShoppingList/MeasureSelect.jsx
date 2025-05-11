@@ -1,13 +1,13 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { productFormActionTypes } from "./reducers/productFormReducer";
 
 export const MeasureSelect = ({
-    selectedProduct,
-    selectedMeasure,
-    measureInputValue,
-    setSelectedMeasure,
-    setMeasureInputValue,
+    state,
+    dispatch,
 }) => {
+    const {selectedMeasure, selectedProduct, measureInputValue} = state
+
     return (
         <Autocomplete
             disablePortal
@@ -17,12 +17,15 @@ export const MeasureSelect = ({
             inputValue={measureInputValue}
             onInputChange={(event, newInputValue) => {
                 if (!selectedMeasure) {
-                    setSelectedMeasure(newInputValue);
+                    dispatch({ type: productFormActionTypes.SET_INPUT, payload: newInputValue });
                 }
             }}
             onChange={(event, newValue) => {
-                setSelectedMeasure(newValue ?? null);
-                setMeasureInputValue(newValue ? newValue.label : "");
+                dispatch({ type: productFormActionTypes.SET_MEASURE, payload: newValue ?? null });
+                dispatch({
+                    type: productFormActionTypes.SET_MEASURE_INPUT,
+                    payload: newValue ? newValue.label : "",
+                });
             }}
             isOptionEqualToValue={(option, value) => option.uri === value.uri}
             sx={{
