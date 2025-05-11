@@ -1,9 +1,13 @@
-import { useContext, useState, useRef } from "react";
+import { useContext, useRef, useReducer } from "react";
 import { useFetchProduct } from "../../hooks";
 
 import { SnackbarContext, ShoppingListContext } from "../../contexts";
-
 import { ProductSelect, MeasureSelect } from "./";
+import {
+    productFormInitialState,
+    productFormActionTypes,
+    productFormReducer,
+} from "./reducers/productFormReducer";
 
 const inputDebounce = (func, delay = 300) => {
     let timer;
@@ -20,14 +24,9 @@ export const AddProductInput = () => {
     const { addSingleProduct } = useContext(ShoppingListContext);
     const { showMessage } = useContext(SnackbarContext);
     const { results, error, loading, fetchProduct } = useFetchProduct();
+    const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
 
-    const [inputValue, setInputValue] = useState("");
-    const [selectedProduct, setSelectedProduct] = useState(null);
-
-    const [measureInputValue, setMeasureInputValue] = useState("");
-    const [selectedMeasure, setSelectedMeasure] = useState(null);
-
-    const [quantityInputValue, setQuantityInputValue] = useState(0);
+    const { selectedProduct, selectedMeasure, quantityInputValue } = state;
 
     const updateQuery = (q) => {
         if (q.trim().length && !selectedProduct) {
@@ -39,13 +38,13 @@ export const AddProductInput = () => {
     const saveInput = useRef(inputDebounce(updateQuery, 1000));
 
     const handleChange = (value) => {
-        setInputValue(value);
+        dispatch({ type: productFormActionTypes.SET_INPUT, payload: value });
         saveInput.current(value);
     };
 
     const handleQuantityChange = (value) => {
         console.log(value);
-        setQuantityInputValue(value);
+        dispatch({ type: productFormActionTypes.SET_QUANTITY, payload: value });
     };
 
     const handleAddProduct = () => {
@@ -84,22 +83,12 @@ export const AddProductInput = () => {
             <p>Add a product:</p>
             <ProductSelect
                 results={results}
-                selectedProduct={selectedProduct}
-                inputValue={inputValue}
                 handleChange={handleChange}
-                setSelectedProduct={setSelectedProduct}
-                setInputValue={setInputValue}
-                setSelectedMeasure={setSelectedMeasure}
-                setMeasureInputValue={setMeasureInputValue}
+                dispatch={dispatch}
+                state={state}
                 loading={loading}
             />
-            <MeasureSelect
-                selectedProduct={selectedProduct}
-                selectedMeasure={selectedMeasure}
-                measureInputValue={measureInputValue}
-                setSelectedMeasure={setSelectedMeasure}
-                setMeasureInputValue={setMeasureInputValue}
-            />
+            <MeasureSelect state={state} dispatch={dispatch} />
             <input
                 className="w-[130px] pl-[14px] py-[16px] bg-[var(--additional-text-color)] rounded-sm"
                 type="number"
