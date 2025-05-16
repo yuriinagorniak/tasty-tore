@@ -6,3 +6,5 @@ export { PageBanner } from "./PageBanner";
 export { SeparatorLine } from "./SeparatorLine";
 export { TransparentButton } from "./TransparentButton";
 export { BasicModal } from "./BasicModal";
+export { Input } from "./Input";
+export { LabelledInput } from "./LabelledInput";
