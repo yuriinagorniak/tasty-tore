@@ -4,18 +4,21 @@ import {
     RecipeContextProvider,
     SavedRecipesContextProvider,
     SnackbarContextProvider,
+    AuthContextProvider,
 } from "../contexts";
 
 export const AppProviders = ({ children }) => {
     return (
         <SnackbarContextProvider>
-            <RecipeContextProvider>
-                <SavedRecipesContextProvider>
-                    <ShoppingListContextProvider>
-                        <MealPlannerContextProvider>{children}</MealPlannerContextProvider>
-                    </ShoppingListContextProvider>
-                </SavedRecipesContextProvider>
-            </RecipeContextProvider>
+            <AuthContextProvider>
+                <RecipeContextProvider>
+                    <SavedRecipesContextProvider>
+                        <ShoppingListContextProvider>
+                            <MealPlannerContextProvider>{children}</MealPlannerContextProvider>
+                        </ShoppingListContextProvider>
+                    </SavedRecipesContextProvider>
+                </RecipeContextProvider>
+            </AuthContextProvider>
         </SnackbarContextProvider>
     );
 };
