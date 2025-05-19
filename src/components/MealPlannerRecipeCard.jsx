@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSnackbar } from "../hooks";
 import { BookmarkIcon, PlusSign } from "../shared";
 import { RecipeContext, SavedRecipesContext } from "../contexts";
+import { ROUTES } from "../constants/routes";
 
 export const MealPlannerRecipeCard = ({ data }) => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const MealPlannerRecipeCard = ({ data }) => {
 
     const handleOpenRecipe = (recipeHref) => {
         setSelectedRecipe(recipeHref);
-        navigate(`/recipe`);
+        navigate(ROUTES.RECIPE_PAGE);
         window.scrollTo({ top: 0 });
     };
 
@@ -29,7 +30,7 @@ export const MealPlannerRecipeCard = ({ data }) => {
     };
 
     const handleAddRecipe = () => {
-        navigate("/recipes");
+        navigate(ROUTES.RECIPES);
     };
 
     return (
