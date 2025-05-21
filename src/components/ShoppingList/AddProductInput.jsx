@@ -15,7 +15,6 @@ const inputDebounce = (func, delay = 300) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
             func.call(this, query);
-            console.log("debounce called");
         }, delay);
     };
 };
@@ -30,7 +29,6 @@ export const AddProductInput = () => {
 
     const updateQuery = (q) => {
         if (q.trim().length && !selectedProduct) {
-            console.log(selectedProduct);
             fetchProduct(q);
         }
     };
@@ -43,7 +41,6 @@ export const AddProductInput = () => {
     };
 
     const handleQuantityChange = (value) => {
-        console.log(value);
         dispatch({ type: productFormActionTypes.SET_QUANTITY, payload: value });
     };
 

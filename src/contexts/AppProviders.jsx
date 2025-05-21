@@ -9,13 +9,13 @@ import {
 export const AppProviders = ({ children }) => {
     return (
         <SnackbarContextProvider>
-            <RecipeContextProvider>
-                <SavedRecipesContextProvider>
-                    <ShoppingListContextProvider>
-                        <MealPlannerContextProvider>{children}</MealPlannerContextProvider>
-                    </ShoppingListContextProvider>
-                </SavedRecipesContextProvider>
-            </RecipeContextProvider>
+                <RecipeContextProvider>
+                    <SavedRecipesContextProvider>
+                        <ShoppingListContextProvider>
+                            <MealPlannerContextProvider>{children}</MealPlannerContextProvider>
+                        </ShoppingListContextProvider>
+                    </SavedRecipesContextProvider>
+                </RecipeContextProvider>
         </SnackbarContextProvider>
     );
 };

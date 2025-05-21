@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { AuthContext } from "./AuthContext";
-import { app, auth } from "../../db/firebase";
+import { app, db, auth } from "../../db/firebase";
 import { GoogleAuthProvider, signOut } from "firebase/auth";
-
-
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const AuthContextProvider = ({ children }) => {
     // const auth = getAuth(app);
@@ -12,28 +11,48 @@ export const AuthContextProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const unsub = auth.onAuthStateChanged((currentUser) => {
+        const unsub = auth.onAuthStateChanged(async (currentUser) => {
             console.log(currentUser);
             setUser(currentUser);
             setIsCheckingAuth(false);
             setError(null);
+
+            if (currentUser) {
+                try {
+                    const userRef = doc(db, "users", currentUser.uid);
+                    const docSnap = await getDoc(userRef);
+                    console.log("Doc snap");
+                    console.log(docSnap);
+
+                    if (!docSnap.exists()) {
+                        await setDoc(userRef, {
+                            uid: currentUser.uid,
+                            email: currentUser.email,
+                            createdAt: new Date(),
+                        });
+                        console.log("User doc created");
+                    }
+                } catch (e) {
+                    console.log("Error creating user doc: ", e);
+                }
+            }
         });
 
         return unsub;
-    }, [auth]);
+    }, []);
 
-    const handleLogout = async () => {
+    const handleLogout = useCallback(async () => {
         await signOut(auth)
             .then(() => setUser(null))
             .catch((e) => setError(e.message));
-    };
+    }, []);
 
-    const ctxValue = {
+    const ctxValue = useMemo(() => ({
         user,
         setUser,
         error,
         isCheckingAuth,
         handleLogout,
-    };
+    }), [user, error, isCheckingAuth, handleLogout]);
     return <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>;
 };

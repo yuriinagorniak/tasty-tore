@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useSnackbar } from "../../hooks";
 import { SavedRecipesContext, RecipeContext } from "../../contexts";
 import { TransparentButton } from "../../shared";

@@ -17,3 +17,7 @@
 .custom-link:hover::after {
     width: 100%;
 }
+
+.custom-link.selected {
+    font-weight: bold;
+}

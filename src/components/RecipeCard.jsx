@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSnackbar } from "../hooks";
 import { BookmarkIcon } from "../shared";
 import { RecipeContext, SavedRecipesContext } from "../contexts";
+import { ROUTES } from "../constants/routes";
 
 
 export const RecipeCard = ({ data }) => {
@@ -16,7 +17,7 @@ export const RecipeCard = ({ data }) => {
 
     const handleOpenRecipe = (recipeHref) => {
         setSelectedRecipe(recipeHref);
-        navigate(`/recipe`);
+        navigate(ROUTES.RECIPE_PAGE);
         window.scrollTo({ top: 0 });
     };
 

@@ -17,6 +17,7 @@ import {
     RecipeDetails,
     RecipeCard,
 } from "../components";
+import { ROUTES } from "../constants/routes";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);
@@ -33,7 +34,7 @@ export const RecipePage = () => {
 
     useEffect(() => {
         if (!selectedRecipe) {
-            navigate("/recipes");
+            navigate(ROUTES.RECIPES);
         }
     }, [selectedRecipe, navigate]);
 
