@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts";
 import { Outlet, Navigate } from "react-router";
 import { useUser } from "../hooks/useUser";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 export const PrivateRoute = () => {
     const { user } = useUser();

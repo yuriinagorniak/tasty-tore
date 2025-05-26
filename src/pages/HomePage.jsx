@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import { Header, HeroSection, RecipeCategories, FeaturedRecipe } from "../components";
 import { TransparentButton } from "../shared";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 export const HomePage = () => {
     const navigate = useNavigate();

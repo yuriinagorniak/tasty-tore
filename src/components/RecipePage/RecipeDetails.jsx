@@ -5,6 +5,10 @@ import { useSnackbar } from "../../hooks";
 import { SavedRecipesContext, RecipeContext } from "../../contexts";
 import { TransparentButton } from "../../shared";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/black-and-white.css";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 export const RecipeDetails = ({ handleOpenModal }) => {
     const showMessage = useSnackbar();
     const { selectedRecipe } = useContext(RecipeContext);
@@ -19,8 +23,11 @@ export const RecipeDetails = ({ handleOpenModal }) => {
 
     const handleSaveRecipe = () => {
         saveRecipe(selectedRecipe);
-        showMessage(currentRecipeSaved ? "The recipe removed from the favourites" : "The recipe saved!", "success");
-    }
+        showMessage(
+            currentRecipeSaved ? "The recipe removed from the favourites" : "The recipe saved!",
+            "success"
+        );
+    };
 
     useEffect(() => {
         setImageLoaded(false);
@@ -34,15 +41,16 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                         <CircularProgress color="inherit" />
                     </div>
                 )}
-                <img
-                    className={`w-full h-full object-cover ${
-                        imageLoaded ? "opacity-100" : "opacity-0"
-                    }`}
+                <LazyLoadImage
+                    alt={recipe.label}
+                    className="w-full h-full overflow-hidden object-cover"
+                    effect="blur"
+                    height="100%"
+                    src={recipe.images?.LARGE?.url || recipe.images?.REGULAR?.url || recipe.image}
+                    width="100%"
                     onLoad={() => {
                         setImageLoaded(true);
                     }}
-                    src={recipe.images?.LARGE?.url || recipe.images?.REGULAR?.url || recipe.image}
-                    alt={recipe.label}
                 />
             </div>
             <div className="w-[30%] flex flex-col justify-between">
@@ -52,7 +60,7 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                         <span className="font-bold">Source:</span> {recipe.source}
                     </p>
                     <p>
-                        <span className="font-bold">Cooking time:</span> {recipe.totalTime}
+                        <span className="font-bold">Cooking time:</span> {recipe.totalTime === 0 ? "-" : recipe.totalTime}
                     </p>
                     <p>
                         <span className="font-bold">Calories:</span> {Math.round(recipe.calories)}
@@ -70,7 +78,13 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                             target="_blank"
                             className="w-[70%]"
                         >
-                            <TransparentButton handleClick={() => showMessage("The recipe will be opened in the new tab")}>Open recipe</TransparentButton>
+                            <TransparentButton
+                                handleClick={() =>
+                                    showMessage("The recipe will be opened in the new tab")
+                                }
+                            >
+                                Open recipe
+                            </TransparentButton>
                         </a>
                         <div className="w-[28%]">
                             <TransparentButton
