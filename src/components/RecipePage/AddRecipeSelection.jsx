@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { MealPlannerContext } from "../../contexts";
 import { useSnackbar } from "../../hooks/useSnackbar";
 
-import { daysOfWeek, mealTypes } from "../../constants/mealPlannerConstants";
+import { DAYS_OF_WEEK, MEAL_TYPES } from "../../constants/MEAL_PLANNER_CONSTANTS";
 
 export const AddRecipeSelection = ({ recipe = null, handleCloseModal = () => {} }) => {
     const { addRecipe } = useContext(MealPlannerContext);
@@ -32,7 +32,7 @@ export const AddRecipeSelection = ({ recipe = null, handleCloseModal = () => {} 
                         ref={dayOfWeek}
                         className="bg-[#373737] rounded capitalize"
                     >
-                        {daysOfWeek.map((day) => (
+                        {DAYS_OF_WEEK.map((day) => (
                             <option value={day} key={day} className="capitalize">
                                 {day}
                             </option>
@@ -49,7 +49,7 @@ export const AddRecipeSelection = ({ recipe = null, handleCloseModal = () => {} 
                         ref={mealType}
                         className="bg-[#373737] rounded capitalize"
                     >
-                        {mealTypes.map((type) => (
+                        {MEAL_TYPES.map((type) => (
                             <option value={type} key={type} className="capitalize">{type}</option>
                         ))}
                     </select>

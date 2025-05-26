@@ -3,7 +3,7 @@ import { RecipeContext } from "../../contexts/RecipeContextProvider/RecipeContex
 
 import { FilterSection, FilterTag } from "../../shared";
 
-import { recipeFilters } from "../../constants/recipeFilters";
+import { RECIPE_FILTERS } from "../../constants/RECIPE_FILTERS";
 
 export const RecipeFilter = () => {
     const { setRecipeFilters } = useContext(RecipeContext);
@@ -56,7 +56,7 @@ export const RecipeFilter = () => {
                         );
                     })}
             </div>
-            {recipeFilters.map((filter) => (
+            {RECIPE_FILTERS.map((filter) => (
                 <FilterSection
                     key={filter.key}
                     filter={filter}

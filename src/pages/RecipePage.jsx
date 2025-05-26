@@ -17,7 +17,7 @@ import {
     RecipeDetails,
     RecipeCard,
 } from "../components";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);

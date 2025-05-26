@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useSnackbar } from "../hooks";
 import { BookmarkIcon } from "../shared";
 import { RecipeContext, SavedRecipesContext } from "../contexts";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 
 export const RecipeCard = ({ data }) => {

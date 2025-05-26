@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useSnackbar } from "../hooks";
 import { BookmarkIcon, PlusSign } from "../shared";
 import { RecipeContext, SavedRecipesContext } from "../contexts";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 export const MealPlannerRecipeCard = ({ data }) => {
     const navigate = useNavigate();
@@ -64,6 +64,3 @@ export const MealPlannerRecipeCard = ({ data }) => {
     );
 };
 
-// <div className="w-[40px] h-[40px]" onClick={handleSaveRecipe}>
-//     <BookmarkIcon filled={recipeSaved} />
-// </div>

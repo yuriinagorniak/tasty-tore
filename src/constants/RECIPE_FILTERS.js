@@ -1,4 +1,4 @@
-export const mealTypeFilter = {
+export const MEAL_TYPE_FILTER = {
     title: "Meal type",
     key: "mealType",
     selectionList: [
@@ -25,7 +25,7 @@ export const mealTypeFilter = {
     ],
 };
 
-export const dietTypeFilter = {
+export const DIET_TYPE_FILTER = {
     title: "Diet type",
     key: "dietType",
     selectionList: [
@@ -56,7 +56,7 @@ export const dietTypeFilter = {
     ],
 };
 
-export const healthLabelsFilter = {
+export const HEALTH_LABELS_FILTER = {
     title: "Health",
     key: "health",
     selectionList: [
@@ -98,4 +98,4 @@ export const healthLabelsFilter = {
     ],
 };
 
-export const recipeFilters = [mealTypeFilter, dietTypeFilter, healthLabelsFilter];
+export const RECIPE_FILTERS = [MEAL_TYPE_FILTER, DIET_TYPE_FILTER, HEALTH_LABELS_FILTER];

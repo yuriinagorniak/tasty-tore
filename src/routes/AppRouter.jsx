@@ -14,7 +14,7 @@ import {
 } from "../pages";
 import { AuthContext } from "../contexts";
 import { PrivateRoute } from "./PrivateRoute";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/ROUTES";
 
 export const AppRouter = () => {
     return (

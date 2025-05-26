@@ -1,4 +1,4 @@
-export const daysOfWeek = [
+export const DAYS_OF_WEEK = [
     "monday",
     "tuesday",
     "wednesday",
@@ -7,4 +7,4 @@ export const daysOfWeek = [
     "saturday",
     "sunday",
 ];
-export const mealTypes = ["breakfast", "lunch", "dinner"];
+export const MEAL_TYPES = ["breakfast", "lunch", "dinner"];
