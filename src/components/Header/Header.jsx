@@ -1,38 +1,32 @@
 import { MainLogo } from "../../shared";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
+import { useUser } from "../../hooks/useUser";
+import { HeaderLink } from "./HeaderLink";
 import "./style.css";
+import { ROUTES } from "../../constants/ROUTES";
+import { NAVIGATION_LINKS } from "../../constants/NAVIGATION_LINKS";
 
 export const Header = () => {
+    const { user } = useUser();
+
     return (
         <header className="w-full p-5 bg-[var(--main-bg-color)]">
             <div className="container">
                 <nav className="w-full">
                     <ul className="text-xl flex justify-around items-center">
-                        <li>
-                            <NavLink to="/">
-                                <MainLogo />
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="custom-link" to="/recipes">
-                                Recipes
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="custom-link" to="/favourites">
-                                Favourites
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="custom-link" to="/meal-planner">
-                                Meal Planner
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className="custom-link" to="/shopping-list">
-                                Shopping List
-                            </NavLink>
-                        </li>
+                        <NavLink to="/">
+                            <MainLogo />
+                        </NavLink>
+                        {NAVIGATION_LINKS.general.map((link) => (
+                            <li key={link.content}>
+                                <HeaderLink path={link.path}>{link.content}</HeaderLink>
+                            </li>
+                        ))}
+                        {NAVIGATION_LINKS[user ? "private" : "auth"].map((link) => (
+                            <li key={link.content}>
+                                <HeaderLink path={link.path}>{link.content}</HeaderLink>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </div>
