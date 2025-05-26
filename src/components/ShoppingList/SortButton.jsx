@@ -2,7 +2,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 export const SortButton = ({ sortMethod = null, handleChange = () => {} }) => {
-    console.log(sortMethod)
     return (
         <ToggleButtonGroup
             value={sortMethod}
