@@ -5,42 +5,13 @@ import { useLocalStorage } from "../../hooks";
 import { useUser } from "../../hooks/useUser";
 import { db } from "../../db/firebase";
 import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { useFirestore } from "../../hooks";
 
 export const ShoppingListContextProvider = ({ children }) => {
     const { user } = useUser();
-    const { getFromStorage, setToStorage } = useLocalStorage("shoppingList");
     const [hasFetchedData, setHasFetchedData] = useState(false);
 
-    const [shoppingList, setShoppingList] = useState([]);
-    useEffect(() => {
-        console.log("user has been changed");
-
-        if (!user) {
-            setShoppingList([]);
-            setHasFetchedData(false);
-            console.log("SL cleared");
-            return;
-        }
-
-        const shoppingListRef = doc(db, "users", user.uid, "data", "shoppingList");
-
-        const unsubscribe = onSnapshot(
-            shoppingListRef,
-            (docSnap) => {
-                if (docSnap.exists()) {
-                    setShoppingList(docSnap.data().items || []);
-                } else {
-                    setShoppingList([]);
-                }
-                setHasFetchedData(true);
-            },
-            (error) => {
-                console.error("Failed to fetch shopping list from Firestore:", error);
-            }
-        );
-
-        return () => unsubscribe(); // Cleanup listener on unmount
-    }, [user]);
+    const [shoppingList, setShoppingList] = useFirestore('shoppingList', []);
 
     const addProduct = (newProduct, list) => {
         const updatedList = JSON.parse(JSON.stringify(list));
@@ -98,22 +69,6 @@ export const ShoppingListContextProvider = ({ children }) => {
     const deleteProduct = (productId) => {
         setShoppingList((prev) => prev.filter((item) => item.foodId !== productId));
     };
-
-    useEffect(() => {
-        const saveShoppingListToDB = async () => {
-            if (!user || !hasFetchedData) {
-                return;
-            }
-            try {
-                const shoppingListRef = doc(db, "users", user.uid, "data", "shoppingList");
-                await setDoc(shoppingListRef, { items: shoppingList });
-            } catch (e) {
-                console.error("Failed to save shopping list to Firestore:", e);
-            }
-        };
-
-        saveShoppingListToDB();
-    }, [shoppingList, user, hasFetchedData]);
 
     const ctxValue = { shoppingList, addRecipeIngredients, addSingleProduct, deleteProduct };
     return <ShoppingListContext.Provider value={ctxValue}>{children}</ShoppingListContext.Provider>;
