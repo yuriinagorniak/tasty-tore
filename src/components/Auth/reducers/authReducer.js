@@ -1,4 +1,4 @@
-export const getInitialValue = (authOption) => ({
+export const getAuthInitialValue = (authOption) => ({
     isRegistering: authOption === "signup",
     displayName: "",
     email: "",
