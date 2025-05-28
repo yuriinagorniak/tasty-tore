@@ -4,8 +4,6 @@ import { TransparentButton } from "../shared";
 
 export const Dashboard = () => {
     const { user, handleLogout } = useUser();
-    console.log("dashboard rerendered")
-    console.log(user.displayName || user.email);
     return (
         <>
             <PageBanner pageTitle={`Welcome back, ${user.displayName || user.email}`} />

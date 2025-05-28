@@ -5,14 +5,12 @@ import { GoogleAuthProvider, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const AuthContextProvider = ({ children }) => {
-    // const auth = getAuth(app);
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const unsub = auth.onAuthStateChanged(async (currentUser) => {
-            console.log(currentUser);
             setUser(currentUser);
             setIsCheckingAuth(false);
             setError(null);
@@ -21,8 +19,6 @@ export const AuthContextProvider = ({ children }) => {
                 try {
                     const userRef = doc(db, "users", currentUser.uid);
                     const docSnap = await getDoc(userRef);
-                    console.log("Doc snap");
-                    console.log(docSnap);
 
                     if (!docSnap.exists()) {
                         await setDoc(userRef, {
@@ -30,7 +26,6 @@ export const AuthContextProvider = ({ children }) => {
                             email: currentUser.email,
                             createdAt: new Date(),
                         });
-                        console.log("User doc created");
                     }
                 } catch (e) {
                     console.log("Error creating user doc: ", e);
