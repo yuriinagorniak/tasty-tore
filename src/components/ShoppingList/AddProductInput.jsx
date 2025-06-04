@@ -1,7 +1,7 @@
 import { useContext, useRef, useReducer } from "react";
-import { useFetchProduct } from "../../hooks";
+import { useFetchProduct, useSnackbar } from "../../hooks";
 
-import { SnackbarContext, ShoppingListContext } from "../../contexts";
+import { ShoppingListContext } from "../../contexts";
 import { ProductSelect, MeasureSelect } from "./";
 import {
     productFormInitialState,
@@ -21,7 +21,7 @@ const inputDebounce = (func, delay = 300) => {
 
 export const AddProductInput = () => {
     const { addSingleProduct } = useContext(ShoppingListContext);
-    const { showMessage } = useContext(SnackbarContext);
+    const { showMessage } = useSnackbar();
     const { results, error, loading, fetchProduct } = useFetchProduct();
     const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
 
