@@ -11,6 +11,7 @@ import {
     MealPlanner,
     PageNotFound,
     Auth,
+    Inventory
 } from "../pages";
 import { AuthContext } from "../contexts";
 import { PrivateRoute } from "./PrivateRoute";
@@ -33,6 +34,7 @@ export const AppRouter = () => {
                     <Route path={ROUTES.FAVOURITES} element={<FavouriteRecipes />} />
                     <Route path={ROUTES.MEAL_PLANNER} element={<MealPlanner />} />
                     <Route path={ROUTES.SHOPPING_LIST} element={<ShoppingList />} />
+                    <Route path={ROUTES.INVENTORY} element={<Inventory />} />
                 </Route>
 
                 <Route path={ROUTES.RECIPE_PAGE} element={<RecipePage />} />

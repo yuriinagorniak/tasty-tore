@@ -1,13 +1,13 @@
-import { useContext, useRef, useReducer } from "react";
-import { useFetchProduct, useSnackbar } from "../../hooks";
-
-import { ShoppingListContext } from "../../contexts";
-import { ProductSelect, MeasureSelect } from "./";
 import {
     productFormInitialState,
     productFormActionTypes,
     productFormReducer,
 } from "./reducers/productFormReducer";
+
+import { useContext, useRef, useReducer } from "react";
+import { InventoryContext } from "../../contexts";
+import { useSnackbar, useFetchProduct } from "../../hooks";
+import { ProductSelect, MeasureSelect } from "./";
 
 const inputDebounce = (func, delay = 300) => {
     let timer;
@@ -19,14 +19,14 @@ const inputDebounce = (func, delay = 300) => {
     };
 };
 
+
 export const AddProductInput = () => {
-    const { addSingleProduct } = useContext(ShoppingListContext);
+    const { addSingleProduct } = useContext(InventoryContext);
     const showMessage = useSnackbar();
     const { results, error, loading, fetchProduct } = useFetchProduct();
     const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
-    console.log(results);
 
-    const { selectedProduct, selectedMeasure, quantityInputValue } = state;
+    const { selectedProduct, selectedMeasure, quantityInputValue, endDateValue } = state;
 
     const updateQuery = (q) => {
         if (q.trim().length && !selectedProduct) {
@@ -34,15 +34,19 @@ export const AddProductInput = () => {
         }
     };
 
-    const saveInput = useRef(inputDebounce(updateQuery, 1000));
+    const updateResults = useRef(inputDebounce(updateQuery, 1000));
 
-    const handleChange = (value) => {
-        dispatch({ type: productFormActionTypes.SET_INPUT, payload: value });
-        saveInput.current(value);
+    const handleInputChange = (newInputValue) => {
+        dispatch({ type: productFormActionTypes.SET_INPUT, payload: newInputValue });
+        updateResults.current(newInputValue);
     };
 
     const handleQuantityChange = (value) => {
         dispatch({ type: productFormActionTypes.SET_QUANTITY, payload: value });
+    };
+
+    const handleEndDateChange = (value) => {
+        dispatch({ type: productFormActionTypes.SET_END_DATE, payload: value });
     };
 
     const handleAddProduct = () => {
@@ -62,6 +66,7 @@ export const AddProductInput = () => {
                 image: selectedProduct.food.image ?? "",
                 quantity: quantityValue,
                 measure: selectedMeasure.label.toLowerCase(),
+                endDate: endDateValue
             };
             addSingleProduct(newProduct);
             showMessage("product added", "success");
@@ -81,7 +86,7 @@ export const AddProductInput = () => {
             <p>Add a product:</p>
             <ProductSelect
                 results={results}
-                handleChange={handleChange}
+                handleChange={handleInputChange}
                 dispatch={dispatch}
                 state={state}
                 loading={loading}
@@ -92,6 +97,16 @@ export const AddProductInput = () => {
                 type="number"
                 value={quantityInputValue}
                 onChange={(e) => handleQuantityChange(e.target.value)}
+                title="Quantity"
+                min="0"
+                step="0.1"
+            />
+            <input
+                className="w-[160px] pl-[14px] py-[16px] bg-[var(--additional-text-color)] rounded-sm"
+                type="date"
+                title="Expired by"
+                value={endDateValue ?? ""}
+                onChange={(e) => handleEndDateChange(e.target.value)}
                 min="0"
                 step="0.1"
             />

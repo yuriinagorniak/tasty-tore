@@ -1,0 +1,46 @@
+import { PageBanner, SeparatorLine } from "../shared";
+import { AddProductInput, ListItem, ListHeader } from "../components/Inventory";
+import { useContext } from "react";
+import { InventoryContext } from "../contexts";
+import { useSnackbar } from "../hooks";
+
+export const Inventory = () => {
+    const showMessage = useSnackbar();
+    const { inventory, deleteProduct } = useContext(InventoryContext);
+
+    const handleDeleteProduct = (id) => {
+        deleteProduct(id);
+        showMessage("The product removed from the inventory", "success");
+    };
+
+    return (
+        <>
+            <PageBanner pageTitle="Less waste, more taste" />
+            <div className="container text-center py-10 flex flex-col gap-5">
+                <AddProductInput />
+                {inventory.length > 0 ? (
+                    <>
+                        <ListHeader />
+                        <SeparatorLine />
+                        <div>
+                            {inventory.map((product) => (
+                                <div
+                                    className="my-2 flex flex-col items-center gap-2"
+                                    key={product.foodId}
+                                >
+                                    <ListItem
+                                        prod={product}
+                                        handleDeleteProduct={handleDeleteProduct}
+                                    />
+                                    <SeparatorLine color="#373737" />
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <p>Inventory is empty</p>
+                )}
+            </div>
+        </>
+    );
+};
