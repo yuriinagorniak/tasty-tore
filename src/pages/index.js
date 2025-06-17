@@ -9,4 +9,5 @@ export { ShoppingList } from "./ShoppingList";
 export { MealPlanner } from "./MealPlanner";
 export { PageNotFound } from "./PageNotFound";
 export { Auth } from "./Auth";
+export { Inventory } from "./Inventory";
 
