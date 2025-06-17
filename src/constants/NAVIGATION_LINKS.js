@@ -21,6 +21,10 @@ export const NAVIGATION_LINKS = {
             content: "Shopping List",
         },
         {
+            path: ROUTES.INVENTORY,
+            content: "Inventory",
+        },
+        {
             path: ROUTES.DASHBOARD,
             content: "Dashboard",
         },

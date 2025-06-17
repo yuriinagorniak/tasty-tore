@@ -10,4 +10,5 @@ export const ROUTES = {
     FAVOURITES: '/favourites',
     MEAL_PLANNER: '/meal-planner',
     SHOPPING_LIST: '/shopping-list',
+    INVENTORY: '/inventory'
 }
