@@ -21,9 +21,10 @@ const inputDebounce = (func, delay = 300) => {
 
 export const AddProductInput = () => {
     const { addSingleProduct } = useContext(ShoppingListContext);
-    const { showMessage } = useSnackbar();
+    const showMessage = useSnackbar();
     const { results, error, loading, fetchProduct } = useFetchProduct();
     const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
+    console.log(results);
 
     const { selectedProduct, selectedMeasure, quantityInputValue } = state;
 

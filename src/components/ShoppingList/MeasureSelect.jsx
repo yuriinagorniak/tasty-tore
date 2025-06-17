@@ -2,11 +2,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { productFormActionTypes } from "./reducers/productFormReducer";
 
-export const MeasureSelect = ({
-    state,
-    dispatch,
-}) => {
-    const {selectedMeasure, selectedProduct, measureInputValue} = state
+export const MeasureSelect = ({ state, dispatch }) => {
+    const { selectedMeasure, selectedProduct, measureInputValue } = state;
 
     return (
         <Autocomplete
@@ -17,7 +14,10 @@ export const MeasureSelect = ({
             inputValue={measureInputValue}
             onInputChange={(event, newInputValue) => {
                 if (!selectedMeasure) {
-                    dispatch({ type: productFormActionTypes.SET_INPUT, payload: newInputValue });
+                    dispatch({
+                        type: productFormActionTypes.SET_MEASURE_INPUT,
+                        payload: newInputValue,
+                    });
                 }
             }}
             onChange={(event, newValue) => {
