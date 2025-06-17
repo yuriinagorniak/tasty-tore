@@ -17,7 +17,7 @@ export const Inventory = () => {
         <>
             <PageBanner pageTitle="Less waste, more taste" />
             <div className="container text-center py-10 flex flex-col gap-5">
-                {/* <AddProductInput /> */}
+                <AddProductInput />
                 {inventory.length > 0 ? (
                     <>
                         <ListHeader />
