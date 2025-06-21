@@ -16,7 +16,7 @@ export const PageBanner = ({ children = "", pageTitle = null, bg = DefaultBg }) 
                     width="100%"
                 />
             </div>
-            <div className="relative z-3 container flex flex-col items-center pt-36 pb-40 text-center text-(--secondary-text-color) font-bold">
+            <div className="relative z-3 container flex flex-col items-center pt-36 pb-40 max-sm:px-3 text-center text-(--secondary-text-color) font-bold flex-wrap">
                 {pageTitle && <h3 className="text-4xl">{pageTitle}</h3>}
                 {children}
             </div>
