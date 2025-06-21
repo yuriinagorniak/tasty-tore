@@ -38,7 +38,7 @@ export const LoginForm = ({ dispatch, authState, handleRegisteringChange }) => {
 
     return (
         <>
-            <form className="w-[400px] flex flex-col gap-3">
+            <form className="w-[300px] sm:w-[400px] flex flex-col gap-3">
                 <LabelledInput
                     title="Email:"
                     placeholder="Enter your email"

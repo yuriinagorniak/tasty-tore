@@ -31,7 +31,7 @@ export const ProductSelect = ({ results, handleChange, state, dispatch, loading 
             loading={loading}
             isOptionEqualToValue={(option, value) => option.food.foodId === value.food.foodId}
             sx={{
-                width: 300,
+                width: "100%",
                 backgroundColor: "var(--additional-bg-color)",
                 borderRadius: "5px",
             }}

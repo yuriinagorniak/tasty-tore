@@ -34,7 +34,7 @@ export const RecipeCard = ({ data }) => {
         <>
             {data?.recipe && (
                 <div
-                    className="w-full h-full border-2 rounded-md bg-no-repeat bg-cover bg-center overflow-hidden cursor-pointer"
+                    className="w-[100%] h-[100%] md:w-full md:h-full border-2 rounded-md bg-no-repeat bg-cover bg-center overflow-hidden cursor-pointer"
                     style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url})` }}
                     onClick={() => handleOpenRecipe(data)}
                 >

@@ -19,7 +19,7 @@ export const ListItem = ({ prod = null, handleDeleteProduct = () => {} }) => {
 
     return (
         prod && (
-            <div className="w-[75%] flex items-center justify-between gap-5">
+            <div className="w-[90%] sm:w-[75%] flex items-center justify-between gap-5">
                 <p className="capitalize flex-2 text-left">{prod.food}</p>
                 <p className={`capitalize flex-1 ${isExpired && "font-bold text-red-500"}`}>{formattedDate ?? ""}</p>
                 <div className="flex-1 flex items-center justify-end gap-3">

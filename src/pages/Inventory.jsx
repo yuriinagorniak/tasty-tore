@@ -19,9 +19,9 @@ export const Inventory = () => {
             <div className="container text-center py-10 flex flex-col gap-5">
                 <AddProductInput />
                 {inventory.length > 0 ? (
-                    <>
+                    <div className="w-full flex flex-col gap-5">
                         <ListHeader />
-                        <SeparatorLine />
+                        <SeparatorLine className="w-[95%] sm:w-[80%]"/>
                         <div>
                             {inventory.map((product) => (
                                 <div
@@ -32,11 +32,11 @@ export const Inventory = () => {
                                         prod={product}
                                         handleDeleteProduct={handleDeleteProduct}
                                     />
-                                    <SeparatorLine color="#373737" />
+                                    <SeparatorLine className="w-[92%] sm:w-[80%]" color="#373737" />
                                 </div>
                             ))}
                         </div>
-                    </>
+                    </div>
                 ) : (
                     <p>Inventory is empty</p>
                 )}

@@ -51,7 +51,7 @@ export const RegistrationForm = ({ dispatch, authState, handleRegisteringChange 
 
     return (
         <>
-            <form className="w-[400px] flex flex-col gap-3 justify-center items-center">
+            <form className="w-[300px] sm:w-[400px] flex flex-col gap-3 justify-center items-center">
                 <LabelledInput
                     title="Name"
                     placeholder="Enter your name"

@@ -16,18 +16,18 @@ export const FeaturedRecipe = () => {
             className="bg-no-repeat bg-cover bg-right "
             style={{ backgroundImage: `url(${FeaturedRecipeBg})` }}
         >
-            <div className="container pt-[120px] pb-[120px] flex justify-between items-center">
-                <div className="flex flex-col items-center w-[40%] gap-10">
-                    <div className="lg:w-[180px] lg:h-[180px] 2xl:w-[200px] 2xl:h-[200px]">
+            <div className="container pt-[120px] pb-[120px] flex justify-center md:justify-between items-center flex-wrap gap-20 md:gap-2">
+                <div className="flex flex-col items-center w-[80%] md:w-[40%] gap-10">
+                    <div className="w-[180px] h-[180px] 2xl:w-[200px] 2xl:h-[200px]">
                         <PlateIcon />
                     </div>
-                    <h3 className="lg:text-4xl xl:text-5xl font-bold text-white xl:w-[100%] 2xl:w-[80%] text-center">
+                    <h3 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white xl:w-[100%] 2xl:w-[80%] text-center">
                         SAVOUR THE <span className="text-(--primary-text-color)">{dayName}</span>{" "}
                         SPECIAL
                     </h3>
                 </div>
                 <div className="2xl:w-[40%] flex justify-end">
-                    <div className="w-[425px] h-[265px]">
+                    <div className="w-[330px] h-[200px] md:w-[425px] md:h-[265px]">
                         {recipes.length ? <RecipeCard data={recipes[2]} /> : <div className="w-full h-full flex items-center justify-center"><CircularProgress  color="inherit"/></div>}
                     </div>
                 </div>

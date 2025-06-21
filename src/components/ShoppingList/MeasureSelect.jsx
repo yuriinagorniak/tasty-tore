@@ -29,7 +29,7 @@ export const MeasureSelect = ({ state, dispatch }) => {
             }}
             isOptionEqualToValue={(option, value) => option.uri === value.uri}
             sx={{
-                width: 130,
+                width: "100%",
                 backgroundColor: "var(--additional-bg-color)",
                 borderRadius: "5px",
             }}

@@ -8,6 +8,7 @@ import {
     productFormActionTypes,
     productFormReducer,
 } from "./reducers/productFormReducer";
+import { TransparentButton } from "../../shared";
 
 const inputDebounce = (func, delay = 300) => {
     let timer;
@@ -24,7 +25,6 @@ export const AddProductInput = () => {
     const showMessage = useSnackbar();
     const { results, error, loading, fetchProduct } = useFetchProduct();
     const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
-    console.log(results);
 
     const { selectedProduct, selectedMeasure, quantityInputValue } = state;
 
@@ -77,27 +77,33 @@ export const AddProductInput = () => {
     };
 
     return (
-        <section className="flex items-center justify-center gap-3 mb-10">
+        <section className="w-[300px] sm:w-full m-auto flex flex-col sm:flex-row items-center justify-center gap-3 mb-10 sm:px-2">
             <p>Add a product:</p>
-            <ProductSelect
-                results={results}
-                handleChange={handleChange}
-                dispatch={dispatch}
-                state={state}
-                loading={loading}
-            />
-            <MeasureSelect state={state} dispatch={dispatch} />
-            <input
-                className="w-[130px] pl-[14px] py-[16px] bg-[var(--additional-text-color)] rounded-sm"
-                type="number"
-                value={quantityInputValue}
-                onChange={(e) => handleQuantityChange(e.target.value)}
-                min="0"
-                step="0.1"
-            />
-            <button type="button" onClick={handleAddProduct}>
+            <div className="w-full sm:w-[300px] max-w-[300px]">
+                <ProductSelect
+                    results={results}
+                    handleChange={handleChange}
+                    dispatch={dispatch}
+                    state={state}
+                    loading={loading}
+                />
+            </div>
+            <div className="max-sm:w-full sm:w-[300px] flex flex-row justify-between gap-3">
+                <div className="flex-1">
+                    <MeasureSelect state={state} dispatch={dispatch} />
+                </div>
+                <input
+                    className="w-full flex-1 pl-[14px] py-[16px] bg-[var(--additional-text-color)] rounded-sm"
+                    type="number"
+                    value={quantityInputValue}
+                    onChange={(e) => handleQuantityChange(e.target.value)}
+                    min="0"
+                    step="0.1"
+                />
+            </div>
+            <TransparentButton className="w-full sm:w-[100px]" handleClick={handleAddProduct}>
                 Add
-            </button>
+            </TransparentButton>
         </section>
     );
 };

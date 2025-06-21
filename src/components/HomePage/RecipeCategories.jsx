@@ -41,11 +41,11 @@ export const RecipeCategories = () => {
     return (
         <section className="bg-white flex flex-col items-center justify-center">
             <div className="container pt-[60px] pb-[90px]">
-                <h3 className="mb-[40px] text-[36px] font-bold text-black text-center">
+                <h3 className="px-10 mb-[40px] text-[36px] font-bold text-black text-center">
                     Recipes by category
                 </h3>
 
-                <div className="flex items-center justify-around px-5 flex-wrap">
+                <div className="w-[80%] sm:w-full 2xl:w-[80%] m-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5">
                     {categories.map((category) => (
                         <NavLink key={category.title} to={category.link}>
                             <RecipeCategoryCard

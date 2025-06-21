@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { DAYS_OF_WEEK, MEAL_TYPES } from "../../constants/MEAL_PLANNER_CONSTANTS";
 import { MealPlannerContext } from "./MealPlannerContext";
-import { useFirestore, useLocalStorage } from "../../hooks";
+import { useFirestore } from "../../hooks";
 
 const initialPlanner = DAYS_OF_WEEK.reduce((daysAcc, day) => {
     daysAcc[day] = MEAL_TYPES.reduce((mealsAcc, type) => {

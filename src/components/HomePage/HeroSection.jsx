@@ -4,7 +4,7 @@ import HeroSectionBg from "../../assets/HomePage/hero-section-bg.jpg";
 export const HeroSection = () => {
     return (
         <PageBanner bg={HeroSectionBg}>
-            <div className="flex items-center gap-10">
+            <div className="flex flex-wrap items-center justify-center gap-10">
                 <MainLogo width={140} height={140} />
                 <div className="font-bold pt-4 flex flex-col gap-1">
                     <h2 className="text-5xl">TASTY TORE</h2>

@@ -1,11 +1,10 @@
 import { RecipeSearch, RecipeGallery, RecipeFilter } from "../components/Recipes";
-import { RecipeContextProvider } from "../contexts/RecipeContextProvider/RecipeContextProvider";
 
 export const Recipes = () => {
     return (
         <main>
             <RecipeSearch />
-            <section className="container flex gap-16 pt-[60px] pb-[90px]">
+            <section className="container px-[10px] flex items-center lg:items-start flex-col lg:flex-row gap-16 lg:gap-5 pt-[60px] pb-[90px]">
                 <RecipeFilter />
                 <RecipeGallery />
             </section>
