@@ -23,25 +23,35 @@ export const Header = () => {
         });
     };
 
+    const closeNavbar = () => {
+        if (openNavbar) {
+            handleToggleNavbar();
+        }
+    };
+
     return (
         <header className="header-container w-full p-5 bg-[var(--main-bg-color)]">
             <div className="container">
                 <nav className="header-navbar w-full">
                     <ul className="header-navbar__list w-full text-xl flex items-center flex-wrap gap-2">
                         <li className="header-navbar__logo">
-                            <NavLink to="/">
+                            <NavLink to="/" onClick={closeNavbar}>
                                 <MainLogo />
                             </NavLink>
                         </li>
-                        <div className={`header-navbar__links-container ${openNavbar && "active"}  flex-1 `}>
+                        <div
+                            className={`header-navbar__links-container ${
+                                openNavbar && "active"
+                            }  flex-1 `}
+                        >
                             <ul className="h-full flex justify-around gap-3">
                                 {NAVIGATION_LINKS.general.map((link) => (
-                                    <li key={link.content}>
+                                    <li key={link.content} onClick={closeNavbar}>
                                         <HeaderLink path={link.path}>{link.content}</HeaderLink>
                                     </li>
                                 ))}
                                 {NAVIGATION_LINKS[user ? "private" : "auth"].map((link) => (
-                                    <li key={link.content}>
+                                    <li key={link.content} onClick={closeNavbar}>
                                         <HeaderLink path={link.path}>{link.content}</HeaderLink>
                                     </li>
                                 ))}
