@@ -34,7 +34,7 @@ export const RecipeDetails = ({ handleOpenModal }) => {
     }, [location.pathname]);
 
     return (
-        <section className="flex flex-col sm:flex-row justify-center px-1 lg:px-10 pt-2 gap-5 lg:gap-20 2xl:gap-25">
+        <section className="flex flex-col max-sm:items-center sm:flex-row justify-center px-1 lg:px-10 pt-2 gap-5 lg:gap-20 2xl:gap-25">
             <div className="border-4 max-w-[400px] w-full aspect-[1/1] lg:w-[50%] 2xl:w-[400px] 2xl:h-[400px] rounded-xl overflow-hidden">
                 {!imageLoaded && (
                     <div className="w-full h-full flex items-center justify-center">
