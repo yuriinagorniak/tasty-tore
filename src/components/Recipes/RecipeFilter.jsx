@@ -38,7 +38,7 @@ export const RecipeFilter = () => {
     };
 
     return (
-        <div className="w-[20%] bg-[#373737] rounded-xl py-5 px-4">
+        <div className="w-[80%] lg:w-[30%] xl:w-[20%] bg-[#373737] rounded-xl py-5 px-4">
             <h3 className="text-center text-2xl font-bold">Filter search</h3>
             <div className="flex gap-1 py-3 flex-wrap">
                 {Object.entries(filtersApplied).length > 0 &&
