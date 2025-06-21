@@ -15,13 +15,13 @@ export const FavouriteRecipes = () => {
                 pageTitle="Your personal recipe collection"
             ></PageBanner>
             {savedRecipes && (
-                <div className="container">
-                    <div className="flex flex-wrap justify-left items-center gap-10 pt-14">
+                <div className="container pb-[90px]">
+                    <div className="w-[95%] mx-auto grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 pt-14">
                         {savedRecipes.length > 0 ? (
                             savedRecipes.map((data) => (
-                                <div className="w-[325px] h-[165px]" key={data.recipe.uri}>
-                                    <RecipeCard data={data} />
-                                </div>
+                                    <div className="w-[325px] h-[165px]" key={data.recipe.uri}>
+                                        <RecipeCard data={data} />
+                                    </div>
                             ))
                         ) : (
                             <div className="w-full text-center font-bold text-4xl py-10">
