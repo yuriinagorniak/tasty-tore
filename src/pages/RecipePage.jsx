@@ -44,10 +44,10 @@ export const RecipePage = () => {
 
     return (
         <section>
-            <div className="container bg-[#373737] pt-[60px] pb-[90px] px-3 rounded-md">
+            <div className="container w-full sm:w-[95%] max-w-[1280px] bg-[#373737] px-4 2xl:px-16 pt-6 pb-2 2xl:pt-[60px] 2xl:pb-[90px] sm:rounded-md">
                 <RecipeDetails handleOpenModal={handleOpenModal} />
 
-                <div className="flex flex-col items-center my-20">
+                <div className="w-full flex flex-col items-center my-20">
                     <SeparatorLine />
                     <RecipeInfoSection recipe={recipe} dataKey="healthLabels" label="Health" />
                     <SeparatorLine />
@@ -59,9 +59,9 @@ export const RecipePage = () => {
                         addRecipeIngredients={addRecipeIngredients}
                     />
 
-                    <div className="mt-20 flex flex-col items-center gap-4">
+                    <div className="mt-20 flex flex-col items-center gap-8">
                         <h4 className="text-2xl font-bold">You might also like:</h4>
-                        <div className="h-[200px] flex flex-wrap items-center justify-center gap-10">
+                        <div className="flex flex-wrap items-center justify-center gap-8">
                             {suggestedRecipes.map((recipe) => (
                                 <div className="w-[325px] h-[165px]" key={recipe.recipe.uri}>
                                     <RecipeCard data={recipe} />

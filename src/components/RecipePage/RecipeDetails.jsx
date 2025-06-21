@@ -34,8 +34,8 @@ export const RecipeDetails = ({ handleOpenModal }) => {
     }, [location.pathname]);
 
     return (
-        <section className="flex px-16 justify-center gap-25">
-            <div className="border-4 w-[400px] h-[400px] rounded-xl overflow-hidden">
+        <section className="flex flex-col sm:flex-row justify-center px-1 lg:px-10 pt-2 gap-5 lg:gap-20 2xl:gap-25">
+            <div className="border-4 max-w-[400px] w-full aspect-[1/1] lg:w-[50%] 2xl:w-[400px] 2xl:h-[400px] rounded-xl overflow-hidden">
                 {!imageLoaded && (
                     <div className="w-full h-full flex items-center justify-center">
                         <CircularProgress color="inherit" />
@@ -53,30 +53,34 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                     }}
                 />
             </div>
-            <div className="w-[30%] flex flex-col justify-between">
-                <p className="font-bold text-5xl">{recipe.label}</p>
-                <div>
-                    <p>
-                        <span className="font-bold">Source:</span> {recipe.source}
-                    </p>
-                    <p>
-                        <span className="font-bold">Cooking time:</span> {recipe.totalTime === 0 ? "-" : recipe.totalTime}
-                    </p>
-                    <p>
-                        <span className="font-bold">Calories:</span> {Math.round(recipe.calories)}
-                    </p>
-                    <TransparentButton
-                        // handleClick={() => addRecipe("monday", "breakfast", recipe)}
-                        handleClick={() => handleOpenModal()}
-                    >
+            <div className="w-full lg:w-[40%] 2xl:w-[30%] flex flex-col justify-between  text-center gap-2">
+                <div className="lg:flex-1 lg:flex lg:justify-center lg:items-center">
+                    <p className="font-bold text-5xl">{recipe.label}</p>
+                </div>
+                <div className="lg:flex-1 lg:flex lg:flex-col lg:justify-end">
+                    <div className="flex py-5 max-xl:[&>*]:flex-1 max-xl:[&>*]:flex max-xl:[&>*]:flex-col">
+                        <p>
+                            <span className="font-bold">Source:</span> {recipe.source}
+                        </p>
+                        {recipe.totalTime !== 0 && (
+                            <p>
+                                <span className="font-bold">Cooking time:</span> {recipe.totalTime}
+                            </p>
+                        )}
+                        <p>
+                            <span className="font-bold">Calories:</span>{" "}
+                            {Math.round(recipe.calories)}
+                        </p>
+                    </div>
+                    <TransparentButton handleClick={() => handleOpenModal()}>
                         Add to meal plan
                     </TransparentButton>
-                    <div className="pt-2 flex justify-between">
+                    <div className="pt-2 flex justify-between gap-2">
                         <a
                             href={recipe.url}
                             rel="noopener noreferrer"
                             target="_blank"
-                            className="w-[70%]"
+                            className="flex-2"
                         >
                             <TransparentButton
                                 handleClick={() =>
@@ -86,7 +90,7 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                                 Open recipe
                             </TransparentButton>
                         </a>
-                        <div className="w-[28%]">
+                        <div className="flex-1">
                             <TransparentButton
                                 handleClick={handleSaveRecipe}
                                 filled={currentRecipeSaved}
