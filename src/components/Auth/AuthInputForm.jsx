@@ -28,7 +28,7 @@ export const AuthInputForm = ({ authState, dispatch, setUser }) => {
 
     return (
         <section>
-            <div className="container pt-10 flex flex-col items-center justify-center gap-6">
+            <div className="container py-10 flex flex-col items-center justify-center gap-6">
                 {isRegistering ? (
                     <RegistrationForm
                         dispatch={dispatch}

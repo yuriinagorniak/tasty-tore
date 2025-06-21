@@ -1,14 +1,15 @@
 import { Input } from "./Input";
+import { cn } from "../../utils";
 
 export const LabelledInput = ({
     title = "",
-    labelClassName = "absolute top-[50%] translate-y-[-50%] left-[-10px] translate-x-[-100%]",
-    wrapperClassName = "relative w-full",
+    labelClassName = "",
+    wrapperClassName = "",
     ...rest
 }) => {
     return (
-        <div className={wrapperClassName}>
-            <label className={labelClassName} htmlFor={rest.id ?? ""}>
+        <div className={cn(wrapperClassName, "relative w-full flex flex-col")}>
+            <label className={cn(labelClassName, "max-md:sm:w-[80px] sm:absolute sm:top-[50%] sm:translate-y-[-50%] sm:left-[-10px] sm:translate-x-[-100%]")} htmlFor={rest.id ?? ""}>
                 {title}
             </label>
             <Input {...rest} />
