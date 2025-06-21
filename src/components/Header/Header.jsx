@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MainLogo } from "../../shared";
 import { NavLink, useLocation } from "react-router";
 import { useUser } from "../../hooks/useUser";
@@ -15,19 +15,30 @@ export const Header = () => {
         setOpenNavbar((prev) => {
             const newValue = !prev;
             if (newValue) {
-                document.body.style.overflow = "hidden";
+                document.body.classList.add("lock");
             } else {
-                document.body.style.overflow = "";
+                document.body.classList.remove("lock");
             }
             return newValue;
         });
     };
 
-    const closeNavbar = () => {
+    const closeNavbar = useCallback(() => {
         if (openNavbar) {
             handleToggleNavbar();
         }
-    };
+    }, [openNavbar]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1100) {
+                closeNavbar();
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [closeNavbar]);
 
     return (
         <header className="header-container w-full p-5 bg-[var(--main-bg-color)]">
