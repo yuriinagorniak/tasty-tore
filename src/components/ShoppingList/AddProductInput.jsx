@@ -25,7 +25,6 @@ export const AddProductInput = () => {
     const showMessage = useSnackbar();
     const { results, error, loading, fetchProduct } = useFetchProduct();
     const [state, dispatch] = useReducer(productFormReducer, productFormInitialState);
-    console.log(results);
 
     const { selectedProduct, selectedMeasure, quantityInputValue } = state;
 

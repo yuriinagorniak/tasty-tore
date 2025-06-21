@@ -49,10 +49,7 @@ export const InventoryContextProvider = ({ children }) => {
     const deleteProduct = (productId) => {
         setInventory((prev) => prev.filter((item) => item.foodId !== productId));
     };
-
-    console.log("Inventory");
-    console.log(inventory);
-
+    
     const ctxValue = { inventory, addSingleProduct, deleteProduct };
     return <InventoryContext.Provider value={ctxValue}>{children}</InventoryContext.Provider>;
 };

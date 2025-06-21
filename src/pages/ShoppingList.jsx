@@ -16,7 +16,7 @@ export const ShoppingList = () => {
     const handleDeleteProduct = (id) => {
         deleteProduct(id);
         showMessage("The product removed from the shopping list", "success");
-    }; 
+    };
 
     const sortList = (e, newMethod = null) => {
         sortMethod.current = newMethod ?? (sortMethod.current === "ASC" ? "DESC" : "ASC");
@@ -47,7 +47,10 @@ export const ShoppingList = () => {
                         <SeparatorLine />
                         <div>
                             {sortedShoppingList.map((product) => (
-                                <div className="my-2 flex flex-col items-center gap-2">
+                                <div
+                                    key={product.foodId}
+                                    className="my-2 flex flex-col items-center gap-2"
+                                >
                                     <ListItem
                                         prod={product}
                                         handleDeleteProduct={handleDeleteProduct}

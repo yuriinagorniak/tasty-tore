@@ -10,7 +10,7 @@ export const IngredientsSection = ({ recipe, addRecipeIngredients}) => {
                 <h4 className="text-2xl font-bold">Ingredients:</h4>
                 <ul className="w-full flex flex-col flex-wrap gap-2 pt-5 pl-3">
                     {recipe.ingredientLines.map((title) => (
-                        <li>- {title}</li>
+                        <li key={title}>- {title}</li>
                     ))}
                 </ul>
             </div>
@@ -18,7 +18,7 @@ export const IngredientsSection = ({ recipe, addRecipeIngredients}) => {
             <div className="w-full 2xl:w-[30%] md:max-w-[250px]">
                 <TransparentButton
                     handleClick={() => {
-                        showMessage("Ingridients saved to the shopping list", "success");
+                        showMessage("Ingredients saved to the shopping list", "success");
                         addRecipeIngredients(recipe.ingredients);
                     }}
                 >
