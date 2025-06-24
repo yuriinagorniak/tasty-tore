@@ -5,7 +5,7 @@ import { deepCopy } from "../../utils";
 import { useContext } from "react";
 import { InventoryContext } from "../../contexts";
 
-export const List = ({ sortMethod, shoppingList, handleDeleteProduct, deleteProductsById }) => {
+export const List = ({ sortMethod, shoppingList, handleDeleteProduct, showMessage, deleteProductsById }) => {
     const { handleAddSelectedBoughtProducts } = useContext(InventoryContext);
     const [selectedProductsIds, setSelectedProductsIds] = useState([]);
     const [sortedShoppingList, setSortedShoppingList] = useState(deepCopy(shoppingList));
@@ -16,6 +16,7 @@ export const List = ({ sortMethod, shoppingList, handleDeleteProduct, deleteProd
             deleteProductsById(selectedProductsIds);
             handleAddSelectedBoughtProducts(selectedProducts);
             setSelectedProductsIds([]); 
+            showMessage("Products moved to inventory", "success");
         }    
     }
 
