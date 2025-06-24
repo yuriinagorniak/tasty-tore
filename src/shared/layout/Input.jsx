@@ -1,3 +1,5 @@
+import { cn } from "../../utils";
+
 export const Input = ({
     value,
     onChange = () => {},
@@ -5,6 +7,8 @@ export const Input = ({
     placeholder = "",
     id = "",
     required = false,
+    className = ""
+    
 }) => {
 
     return (
@@ -16,7 +20,7 @@ export const Input = ({
             value={value}
             onChange={onChange}
             type={type}
-            className="w-full pl-[14px] py-[11px] bg-[var(--additional-text-color)] rounded-sm"
+            className={cn("w-full pl-[14px] py-[11px] bg-[var(--additional-text-color)] rounded-sm", className)}
         />
     );
 };
