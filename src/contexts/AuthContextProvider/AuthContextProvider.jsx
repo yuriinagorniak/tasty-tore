@@ -36,18 +36,31 @@ export const AuthContextProvider = ({ children }) => {
         return unsub;
     }, []);
 
+    const forceCurrentUserUpdate = useCallback(async () => {
+        try {
+            await auth.currentUser.reload();
+            setUser({ ...auth.currentUser });
+        } catch (e) {
+            console.log("Failed to reload user:", e);
+        }
+    }, [setUser]);
+
     const handleLogout = useCallback(async () => {
         await signOut(auth)
             .then(() => setUser(null))
             .catch((e) => setError(e.message));
     }, []);
 
-    const ctxValue = useMemo(() => ({
-        user,
-        setUser,
-        error,
-        isCheckingAuth,
-        handleLogout,
-    }), [user, error, isCheckingAuth, handleLogout]);
+    const ctxValue = useMemo(
+        () => ({
+            user,
+            setUser,
+            error,
+            isCheckingAuth,
+            handleLogout,
+            forceCurrentUserUpdate,
+        }),
+        [user, error, isCheckingAuth, handleLogout, forceCurrentUserUpdate]
+    );
     return <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>;
 };
