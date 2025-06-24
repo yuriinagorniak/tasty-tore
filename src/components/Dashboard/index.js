@@ -1,0 +1,2 @@
+export { UpdateUserDetailsForm } from "./UpdateUserDetailsForm";
+
