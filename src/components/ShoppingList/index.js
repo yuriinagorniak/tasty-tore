@@ -4,3 +4,4 @@ export { AddProductInput } from "./AddProductInput";
 export { SortButton } from "./SortButton";
 export { ListItem } from "./ListItem";
 export { ListHeader } from "./ListHeader";
+export { List } from "./List";

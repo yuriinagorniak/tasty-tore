@@ -12,16 +12,18 @@ import {
 import { InfoTag, SeparatorLine, TransparentButton, BasicModal } from "../shared";
 import {
     AddRecipeSelection,
-    RecipeInfoSection,
     IngredientsSection,
     RecipeDetails,
     RecipeCard,
+    RecipeLabels,
 } from "../components";
 import { ROUTES } from "../constants/ROUTES";
+import { useUser } from "../hooks/useUser";
 
 export const RecipePage = () => {
     const { selectedRecipe, recipes } = useContext(RecipeContext);
     const { addRecipeIngredients } = useContext(ShoppingListContext);
+    const { user } = useUser();
 
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
@@ -45,16 +47,13 @@ export const RecipePage = () => {
     return (
         <section>
             <div className="container w-full sm:w-[95%] max-w-[1280px] bg-[#373737] px-4 2xl:px-16 pt-6 pb-2 2xl:pt-[60px] 2xl:pb-[90px] sm:rounded-md">
-                <RecipeDetails handleOpenModal={handleOpenModal} />
+                <RecipeDetails userLogged={!!user} handleOpenModal={handleOpenModal} />
 
                 <div className="w-full flex flex-col items-center my-20">
-                    <SeparatorLine />
-                    <RecipeInfoSection recipe={recipe} dataKey="healthLabels" label="Health" />
-                    <SeparatorLine />
-                    <RecipeInfoSection recipe={recipe} dataKey="dietLabels" label="Diet" />
-                    <SeparatorLine />
+                    <RecipeLabels recipe={recipe} />
 
                     <IngredientsSection
+                        userLogged={!!user}
                         recipe={recipe}
                         addRecipeIngredients={addRecipeIngredients}
                     />

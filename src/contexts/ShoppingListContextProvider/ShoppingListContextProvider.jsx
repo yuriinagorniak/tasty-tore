@@ -66,10 +66,14 @@ export const ShoppingListContextProvider = ({ children }) => {
         });
     };
 
-    const deleteProduct = (productId) => {
+    const deleteProductById = (productId) => {
         setShoppingList((prev) => prev.filter((item) => item.foodId !== productId));
     };
 
-    const ctxValue = { shoppingList, addRecipeIngredients, addSingleProduct, deleteProduct };
+    const deleteProductsById = (productIdsList) => {
+        setShoppingList((prev) => prev.filter(item => productIdsList.indexOf(item.foodId) === -1));
+    }
+
+    const ctxValue = { shoppingList, addRecipeIngredients, addSingleProduct, deleteProductById, deleteProductsById };
     return <ShoppingListContext.Provider value={ctxValue}>{children}</ShoppingListContext.Provider>;
 };

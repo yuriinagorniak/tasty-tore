@@ -82,7 +82,7 @@ export const AddProductInput = () => {
     };
 
     return (
-        <section className="w-[350px] sm:w-[450px] md:w-[550px] lg:w-full m-auto flex flex-col lg:flex-row items-center justify-center gap-3 mb-10 sm:px-2">
+        <section className="w-[350px] sm:w-[450px] md:w-[550px] lg:w-[1000px] xl:w-[1100px] m-auto flex flex-col lg:flex-row items-center justify-center gap-3 mb-10 sm:px-2">
             <p>Add a product:</p>
             <div className="w-full lg:w-[300px] lg:max-w-[300px]">
                 <ProductSelect

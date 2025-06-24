@@ -1,7 +1,7 @@
 import { useSnackbar } from "../../hooks";
 import { TransparentButton } from "../../shared";
 
-export const IngredientsSection = ({ recipe, addRecipeIngredients}) => {
+export const IngredientsSection = ({ userLogged = false, recipe, addRecipeIngredients }) => {
     const showMessage = useSnackbar();
 
     return (
@@ -16,14 +16,16 @@ export const IngredientsSection = ({ recipe, addRecipeIngredients}) => {
             </div>
 
             <div className="w-full 2xl:w-[30%] md:max-w-[250px]">
-                <TransparentButton
-                    handleClick={() => {
-                        showMessage("Ingredients saved to the shopping list", "success");
-                        addRecipeIngredients(recipe.ingredients);
-                    }}
-                >
-                    Add to shopping list
-                </TransparentButton>
+                {userLogged && (
+                    <TransparentButton
+                        handleClick={() => {
+                            showMessage("Ingredients saved to the shopping list", "success");
+                            addRecipeIngredients(recipe.ingredients);
+                        }}
+                    >
+                        Add to shopping list
+                    </TransparentButton>
+                )}
             </div>
         </section>
     );

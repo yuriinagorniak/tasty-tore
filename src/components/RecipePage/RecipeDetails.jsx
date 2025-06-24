@@ -9,7 +9,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/black-and-white.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-export const RecipeDetails = ({ handleOpenModal }) => {
+export const RecipeDetails = ({ userLogged = false, handleOpenModal }) => {
     const showMessage = useSnackbar();
     const { selectedRecipe } = useContext(RecipeContext);
     const { savedRecipes, saveRecipe } = useContext(SavedRecipesContext);
@@ -58,7 +58,7 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                     <p className="font-bold text-5xl">{recipe.label}</p>
                 </div>
                 <div className="lg:flex-1 lg:flex lg:flex-col lg:justify-end">
-                    <div className="flex py-5 max-xl:[&>*]:flex-1 max-xl:[&>*]:flex max-xl:[&>*]:flex-col">
+                    <div className="flex py-5 [&>*]:flex-1 [&>*]:flex [&>*]:flex-col">
                         <p>
                             <span className="font-bold">Source:</span> {recipe.source}
                         </p>
@@ -72,9 +72,11 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                             {Math.round(recipe.calories)}
                         </p>
                     </div>
-                    <TransparentButton handleClick={() => handleOpenModal()}>
-                        Add to meal plan
-                    </TransparentButton>
+                    {userLogged && (
+                        <TransparentButton handleClick={() => handleOpenModal()}>
+                            Add to meal plan
+                        </TransparentButton>
+                    )}
                     <div className="pt-2 flex justify-between gap-2">
                         <a
                             href={recipe.url}
@@ -90,14 +92,16 @@ export const RecipeDetails = ({ handleOpenModal }) => {
                                 Open recipe
                             </TransparentButton>
                         </a>
-                        <div className="flex-1">
-                            <TransparentButton
-                                handleClick={handleSaveRecipe}
-                                filled={currentRecipeSaved}
-                            >
-                                {currentRecipeSaved ? "Saved" : "Save"}
-                            </TransparentButton>
-                        </div>
+                        {userLogged && (
+                            <div className="flex-1">
+                                <TransparentButton
+                                    handleClick={handleSaveRecipe}
+                                    filled={currentRecipeSaved}
+                                >
+                                    {currentRecipeSaved ? "Saved" : "Save"}
+                                </TransparentButton>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
