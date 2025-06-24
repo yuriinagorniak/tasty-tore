@@ -75,8 +75,6 @@ export const InventoryContextProvider = ({ children }) => {
     }
 
     const handleAddSelectedBoughtProducts = (products = []) => {
-        console.log("HASBP");
-        console.log(products);
         setInventory((prev) => {
             const boughtProducts = deepCopy(products);
             let updatedInventory = deepCopy(prev); 
