@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSnackbar } from "../hooks";
 import { BookmarkIcon } from "../shared";
 import { RecipeContext, SavedRecipesContext } from "../contexts";
+import RecipeCardImageFallback from "../assets/General/recipe-card-fallback.png";
 import { ROUTES } from "../constants/ROUTES";
 
 
@@ -35,7 +36,7 @@ export const RecipeCard = ({ data }) => {
             {data?.recipe && (
                 <div
                     className="w-[100%] h-[100%] md:w-full md:h-full border-2 rounded-md bg-no-repeat bg-cover bg-center overflow-hidden cursor-pointer"
-                    style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url})` }}
+                    style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url}), url(${RecipeCardImageFallback})` }}
                     onClick={() => handleOpenRecipe(data)}
                 >
                     <div className="bg-[rgba(0,0,0,0.8)] w-full h-full flex flex-col justify-end">

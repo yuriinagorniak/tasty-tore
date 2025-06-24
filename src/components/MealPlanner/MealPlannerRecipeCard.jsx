@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { BookmarkIcon, PlusSign } from "../../shared";
 import { RecipeContext, SavedRecipesContext } from "../../contexts";
 import { ROUTES } from "../../constants/ROUTES";
-import FavouriteRecipesBg from "../../assets/FavouriteRecipes/bg.jpg";
+import RecipeImageFallback from "../../assets/General/recipe-card-fallback.png"
 
 export const MealPlannerRecipeCard = ({ data }) => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const MealPlannerRecipeCard = ({ data }) => {
             {data?.recipe ? (
                 <div
                     className="w-full h-full border-2 rounded-md bg-no-repeat bg-cover bg-center overflow-hidden cursor-pointer"
-                    style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url ?? FavouriteRecipesBg})` }}
+                    style={{ backgroundImage: `url(${data.recipe.images.REGULAR.url}), url(${RecipeImageFallback})` }}
                     onClick={() => handleOpenRecipe(data)}
                 >
                     <div className="bg-[rgba(0,0,0,0.8)] w-full h-full flex flex-col items-center justify-center">
