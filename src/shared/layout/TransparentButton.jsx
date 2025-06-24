@@ -5,6 +5,8 @@ export const TransparentButton = ({
     handleClick = () => {},
     children,
     filled = false,
+    disabled = false,
+    ...props
 }) => {
     return (
         <button
@@ -14,9 +16,12 @@ export const TransparentButton = ({
                         ? "bg-(--primary-text-color) text-(--additional-text-color)"
                         : "bg-(--additional-text-color) text-(--primary-text-color)"
                 }`,
-                className
+                className,
+                disabled && "border-[#5d5d5d] text-[#5d5d5d]",
             )}
             onClick={handleClick}
+            disabled={disabled}
+            {...props}
         >
             {children}
         </button>
