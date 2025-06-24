@@ -53,7 +53,7 @@ export const useFirestore = (dataKey = null, defaultValue) => {
                 const dataRef = doc(db, "users", user.uid, "data", dataKey);
                 await setDoc(dataRef, { items: data });
             } catch (e) {
-                console.error("Failed to save shopping list to Firestore:", e);
+                console.error("Failed to save data to Firestore:", e);
                 showMessage(getFirebaseErrorMessage(e.code), "error");
             }
         };
