@@ -33,10 +33,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiInputBase-input": {
-            color: "#e0cfa4", // normal text color
+            color: "#e0cfa4", 
           },
           "& .MuiInputBase-input.Mui-disabled": {
-            color: "#e0cfa4", // disabled input color
+            color: "#e0cfa4",
           },
         },
       },
