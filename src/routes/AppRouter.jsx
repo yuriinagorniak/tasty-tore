@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router";
 import {
     Dashboard,
@@ -11,7 +10,7 @@ import {
     MealPlanner,
     PageNotFound,
     Auth,
-    Inventory
+    Inventory,
 } from "../pages";
 import { AuthContext } from "../contexts";
 import { PrivateRoute } from "./PrivateRoute";
