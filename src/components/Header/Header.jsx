@@ -4,7 +4,6 @@ import { NavLink, useLocation } from "react-router";
 import { useUser } from "../../hooks/useUser";
 import { HeaderLink } from "./HeaderLink";
 import "./style.css";
-import { ROUTES } from "../../constants/ROUTES";
 import { NAVIGATION_LINKS } from "../../constants/NAVIGATION_LINKS";
 
 export const Header = () => {
